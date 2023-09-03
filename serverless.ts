@@ -6,13 +6,13 @@ const serverlessConfiguration: AWS = {
   service: 'working-api',
   frameworkVersion: '3',
   useDotenv: true,
-  plugins: ['serverless-esbuild', 'serverless-dotenv-plugin'],
+  plugins: ['serverless-dotenv-plugin', 'serverless-esbuild'],
   provider: {
     name: 'aws',
     runtime: 'nodejs18.x',
     region: 'ap-northeast-1',
     deploymentBucket: {name: 'working-api-deploy'},
-    role: process.env.LAMBDA_ROLE,
+    role: '${env:LAMBDA_ROLE}',
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
