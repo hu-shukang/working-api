@@ -1,6 +1,7 @@
 import type { AWS } from '@serverless/typescript';
-import { UserPool, UserPoolClient, UserPoolDomain, UserPoolIdentityProvider } from "@libs/cognito";
+import { UserPool, UserPoolClient, UserPoolDomain, UserPoolIdentityProvider } from "@resources/cognito";
 import hello from '@functions/hello';
+import { WorkingTable } from '@resources/dynamodb';
 
 const serverlessConfiguration: AWS = {
   service: 'working-api',
@@ -25,6 +26,8 @@ const serverlessConfiguration: AWS = {
       UserPoolDomain,
       UserPoolIdentityProvider,
       UserPoolClient,
+      // DynamoDB
+      WorkingTable
     },
   },
   // import the function via paths
