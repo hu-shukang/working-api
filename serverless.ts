@@ -12,7 +12,7 @@ const serverlessConfiguration: AWS = {
     runtime: 'nodejs18.x',
     region: 'ap-northeast-1',
     deploymentBucket: {name: 'working-api-deploy'},
-    role: 'arn:aws:iam::146114061358:role/LambdaRole',
+    role: '${env:LAMBDA_ROLE}',
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
@@ -46,7 +46,7 @@ const serverlessConfiguration: AWS = {
       concurrency: 10,
     },
     dotenv: {
-      path: '.env'
+      path: `env/.env.${process.env.STAGE}`
     }
   },
 };

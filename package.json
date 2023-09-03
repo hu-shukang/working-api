@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "sls:remove": "serverless remove",
-    "sls:deploy": "serverless deploy"
+    "sls:deploy:it": "serverless deploy --stage it",
+    "sls:deploy:st": "serverless deploy --stage st"
   },
   "engines": {
     "node": ">=14.15.0"
