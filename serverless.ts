@@ -7,6 +7,21 @@ const serverlessConfiguration: AWS = {
   frameworkVersion: '3',
   useDotenv: true,
   plugins: ['serverless-esbuild', 'serverless-dotenv-plugin'],
+  custom: {
+    esbuild: {
+      bundle: true,
+      minify: false,
+      sourcemap: true,
+      exclude: ['aws-sdk'],
+      target: 'node14',
+      define: { 'require.resolve': undefined },
+      platform: 'node',
+      concurrency: 10,
+    },
+    dotenv: {
+      path: "env/.env.${opt:stage}"
+    }
+  },
   provider: {
     name: 'aws',
     runtime: 'nodejs18.x',
@@ -34,21 +49,6 @@ const serverlessConfiguration: AWS = {
   // import the function via paths
   functions: { hello },
   package: { individually: true },
-  custom: {
-    esbuild: {
-      bundle: true,
-      minify: false,
-      sourcemap: true,
-      exclude: ['aws-sdk'],
-      target: 'node14',
-      define: { 'require.resolve': undefined },
-      platform: 'node',
-      concurrency: 10,
-    },
-    dotenv: {
-      path: "env/.env.${opt:stage}"
-    }
-  },
 };
 
 module.exports = serverlessConfiguration;
