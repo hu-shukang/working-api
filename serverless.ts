@@ -44,9 +44,9 @@ const serverlessConfiguration: AWS = {
       platform: 'node',
       concurrency: 10,
     },
-    dotenv: {
-      path: "env/.env.${opt:stage}"
-    }
+    // dotenv: {
+    //   path: "env/.env.${opt:stage}"
+    // }
   },
 };
 
