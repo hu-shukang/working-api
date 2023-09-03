@@ -1,7 +1,7 @@
 export const UserPool = {
   Type: "AWS::Cognito::UserPool",
   Properties: {
-    UserPoolName: "working-user-pool-${opt.stage}",
+    UserPoolName: "working-user-pool-${opt:stage}",
     UsernameAttributes: ["email"],
     AutoVerifiedAttributes: ["email"],
     Schema: [
@@ -43,7 +43,7 @@ export const UserPool = {
 export const UserPoolDomain = {
   Type: "AWS::Cognito::UserPoolDomain",
   Properties: {
-    Domain: "working-${opt.stage}",
+    Domain: "working-${opt:stage}",
     UserPoolId: {
       Ref: "UserPool",
     },
@@ -77,7 +77,7 @@ export const UserPoolClient = {
   Type: "AWS::Cognito::UserPoolClient",
   DependsOn: ["UserPoolIdentityProvider"],
   Properties: {
-    ClientName: "working-user-pool-client-${opt.stage}",
+    ClientName: "working-user-pool-client-${opt:stage}",
     GenerateSecret: false,
     UserPoolId: {
       Ref: "UserPool",
