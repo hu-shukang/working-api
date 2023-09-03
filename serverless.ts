@@ -10,6 +10,7 @@ const serverlessConfiguration: AWS = {
     name: 'aws',
     runtime: 'nodejs18.x',
     region: 'ap-northeast-1',
+    deploymentBucket: {name: 'working-api-deploy'},
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,

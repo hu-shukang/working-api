@@ -4,7 +4,9 @@
   "description": "Serverless aws-nodejs-typescript template",
   "main": "serverless.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sls:remove": "serverless remove",
+    "sls:deploy": "serverless deploy"
   },
   "engines": {
     "node": ">=14.15.0"
