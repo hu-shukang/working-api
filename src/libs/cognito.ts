@@ -4,7 +4,6 @@ export const UserPool = {
     UserPoolName: "working-user-pool-${env:STAGE}",
     UsernameAttributes: ["email"],
     AutoVerifiedAttributes: ["email"],
-    DeletionProtection: "ACTIVE",
   },
 };
 
