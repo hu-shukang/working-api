@@ -46,7 +46,7 @@ const serverlessConfiguration: AWS = {
       concurrency: 10,
     },
     dotenv: {
-      path: `env/.env.${process.env.STAGE}`
+      path: "env/.env.${opt:stage}"
     }
   },
 };
