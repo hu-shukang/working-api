@@ -4,6 +4,15 @@ export const UserPool = {
     UserPoolName: "working-user-pool-${env:STAGE}",
     UsernameAttributes: ["email"],
     AutoVerifiedAttributes: ["email"],
+    Schema: [
+      {
+        Name: 'role',
+        AttributeDataType: 'String',
+        Mutable: true,
+        Required: false,
+      }
+    ]
+
   },
 };
 
