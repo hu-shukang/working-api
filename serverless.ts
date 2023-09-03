@@ -1,5 +1,5 @@
 import type { AWS } from '@serverless/typescript';
-
+import { UserPool, UserPoolClient, UserPoolDomain, UserPoolIdentityProvider } from "@libs/cognito";
 import hello from '@functions/hello';
 
 const serverlessConfiguration: AWS = {
@@ -19,6 +19,15 @@ const serverlessConfiguration: AWS = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
+    },
+  },
+  resources: {
+    Resources: {
+      // Cognito
+      UserPool,
+      UserPoolDomain,
+      UserPoolIdentityProvider,
+      UserPoolClient,
     },
   },
   // import the function via paths
