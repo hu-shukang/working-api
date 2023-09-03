@@ -1,5 +1,5 @@
 import type { AWS } from '@serverless/typescript';
-import { UserPool, UserPoolClient, UserPoolDomain, UserPoolIdentityProvider } from "@resources/cognito";
+import { UserPool, UserPoolClient, UserPoolDomain, UserPoolIdentityProvider } from '@resources/cognito';
 import hello from '@functions/hello';
 import { WorkingTable } from '@resources/dynamodb';
 import { CognitoAuthorizer } from '@resources/authorizer';
@@ -13,12 +13,12 @@ const serverlessConfiguration: AWS = {
     name: 'aws',
     runtime: 'nodejs18.x',
     region: 'ap-northeast-1',
-    deploymentBucket: {name: 'working-api-deploy'},
+    deploymentBucket: { name: 'working-api-deploy' },
     role: '${env:LAMBDA_ROLE}',
     apiGateway: {
       minimumCompressionSize: 1024,
-      shouldStartNameWithService: true,
-    },
+      shouldStartNameWithService: true
+    }
   },
   resources: {
     Resources: {
@@ -31,7 +31,7 @@ const serverlessConfiguration: AWS = {
       WorkingTable,
       // ApiGateway
       CognitoAuthorizer
-    },
+    }
   },
   // import the function via paths
   functions: { hello },
@@ -45,12 +45,12 @@ const serverlessConfiguration: AWS = {
       target: 'node14',
       define: { 'require.resolve': undefined },
       platform: 'node',
-      concurrency: 10,
-    },
+      concurrency: 10
+    }
     // dotenv: {
     //   path: "env/.env.${opt:stage}"
     // }
-  },
+  }
 };
 
 module.exports = serverlessConfiguration;

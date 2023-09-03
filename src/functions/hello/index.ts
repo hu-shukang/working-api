@@ -9,17 +9,17 @@ export default {
         method: 'post',
         path: 'hello',
         authorizer: {
-          type: "COGNITO_USER_POOLS",
+          type: 'COGNITO_USER_POOLS',
           authorizerId: {
-            Ref: "CognitoAuthorizer",
-          },
+            Ref: 'CognitoAuthorizer'
+          }
         },
         request: {
           schemas: {
-            'application/json': schema,
-          },
-        },
-      },
-    },
-  ],
+            'application/json': schema
+          }
+        }
+      }
+    }
+  ]
 };
