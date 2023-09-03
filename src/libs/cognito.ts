@@ -6,6 +6,30 @@ export const UserPool = {
     AutoVerifiedAttributes: ["email"],
     Schema: [
       {
+        Name: 'email',
+        AttributeDataType: 'String',
+        Mutable: true,
+        Required: true,
+      },
+      {
+        Name: 'family_name',
+        AttributeDataType: 'String',
+        Mutable: true,
+        Required: true,
+      },
+      {
+        Name: 'given_name',
+        AttributeDataType: 'String',
+        Mutable: true,
+        Required: true,
+      },
+      {
+        Name: 'picture',
+        AttributeDataType: 'String',
+        Mutable: true,
+        Required: true,
+      },
+      {
         Name: 'role',
         AttributeDataType: 'String',
         Mutable: true,
