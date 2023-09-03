@@ -8,6 +8,12 @@ export default {
       http: {
         method: 'post',
         path: 'hello',
+        authorizer: {
+          type: "COGNITO_USER_POOLS",
+          authorizerId: {
+            Ref: "CognitoAuthorizer",
+          },
+        },
         request: {
           schemas: {
             'application/json': schema,
