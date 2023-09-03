@@ -12,7 +12,7 @@ const serverlessConfiguration: AWS = {
     runtime: 'nodejs18.x',
     region: 'ap-northeast-1',
     deploymentBucket: {name: 'working-api-deploy'},
-    role: '${env:LAMBDA_ROLE}',
+    role: 'arn:aws:iam::146114061358:role/LambdaRole',
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
