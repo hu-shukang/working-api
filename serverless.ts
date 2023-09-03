@@ -5,7 +5,8 @@ import hello from '@functions/hello';
 const serverlessConfiguration: AWS = {
   service: 'working-api',
   frameworkVersion: '3',
-  plugins: ['serverless-esbuild'],
+  useDotenv: true,
+  plugins: ['serverless-esbuild', 'serverless-dotenv-plugin'],
   provider: {
     name: 'aws',
     runtime: 'nodejs18.x',
@@ -44,6 +45,9 @@ const serverlessConfiguration: AWS = {
       platform: 'node',
       concurrency: 10,
     },
+    dotenv: {
+      path: '.env'
+    }
   },
 };
 

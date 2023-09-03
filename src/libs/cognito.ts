@@ -1,7 +1,7 @@
 export const UserPool = {
   Type: "AWS::Cognito::UserPool",
   Properties: {
-    UserPoolName: "working-user-pool-${self:custom.stage}",
+    UserPoolName: "working-user-pool-${env:STAGE}",
     UsernameAttributes: ["email"],
     AutoVerifiedAttributes: ["email"],
     DeletionProtection: "ACTIVE",
@@ -11,7 +11,7 @@ export const UserPool = {
 export const UserPoolDomain = {
   Type: "AWS::Cognito::UserPoolDomain",
   Properties: {
-    Domain: "working-${self:custom.stage}",
+    Domain: "working-${env:STAGE}",
     UserPoolId: {
       Ref: "UserPool",
     },
@@ -24,8 +24,8 @@ export const UserPoolIdentityProvider = {
     ProviderName: "Google",
     ProviderType: "Google",
     ProviderDetails: {
-      client_id: "${self:custom.googleClientId}",
-      client_secret: "${self:custom.googleClientSecret}",
+      client_id: process.env.GOOGLE_CLIENT_ID,
+      client_secret: process.env.GOOGLE_CLIENT_SECRET,
       authorize_scopes: "email profile openid",
     },
     AttributeMapping: {
@@ -45,7 +45,7 @@ export const UserPoolClient = {
   Type: "AWS::Cognito::UserPoolClient",
   DependsOn: ["UserPoolIdentityProvider"],
   Properties: {
-    ClientName: "working-user-pool-client-${self:custom.stage}",
+    ClientName: "working-user-pool-client-${env:STAGE}",
     GenerateSecret: false,
     UserPoolId: {
       Ref: "UserPool",
