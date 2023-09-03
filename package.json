@@ -4,8 +4,8 @@
   "description": "Serverless aws-nodejs-typescript template",
   "main": "serverless.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "sls:remove": "serverless remove",
+    "sls:remove:it": "serverless remove --stage it",
+    "sls:remove:st": "serverless remove --stage st",
     "sls:deploy:it": "serverless deploy --stage it",
     "sls:deploy:st": "serverless deploy --stage st"
   },
