@@ -1,7 +1,22 @@
-export default {
+export const bodySchema = {
   type: 'object',
+  required: ['provider', 'code'],
   properties: {
-    name: { type: 'string' }
+    provider: {
+      type: 'string',
+      enum: ['google']
+    },
+    code: {
+      type: 'string'
+    }
   },
-  required: ['name']
+  additionalProperties: false
+} as const;
+
+export const schema = {
+  type: 'object',
+  required: ['body'],
+  properties: {
+    body: bodySchema
+  }
 } as const;

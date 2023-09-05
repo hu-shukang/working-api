@@ -11,12 +11,12 @@ export class CognitoLib {
     this.client = new CognitoIdentityProviderClient();
   }
 
-  public async initiateAuth(code: string): Promise<InitiateAuthCommandOutput> {
+  public async initiateAuth(provider: string, code: string): Promise<InitiateAuthCommandOutput> {
     const command = new InitiateAuthCommand({
       AuthFlow: 'CUSTOM_AUTH',
       ClientId: process.env.COGNITO_APP_CLIENT_ID,
       AuthParameters: {
-        USERNAME: 'google',
+        USERNAME: provider,
         CODE: code
       }
     });

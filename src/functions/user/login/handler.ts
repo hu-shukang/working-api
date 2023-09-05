@@ -1,14 +1,16 @@
-import type { ValidatedEventAPIGatewayProxyEvent } from '@libs/api-gateway';
-import { formatJSONResponse } from '@libs/api-gateway';
+import { ValidatedEventAPIGatewayProxyEvent, formatJSONResponse } from '@libs/api-gateway';
 import { middyfy } from '@libs/lambda';
+import { schema, bodySchema } from './schema';
+import { CognitoLib } from '@libs/cognito.lib';
 
-import schema from './schema';
+const login: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async (event) => {
+  const { provider, code } = event.body;
+  const cognitoLib = new CognitoLib();
+  const result = await cognitoLib.initiateAuth(provider, code);
 
-const hello: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
   return formatJSONResponse({
-    message: `Hello ${event.body.name}, welcome to the exciting Serverless world!`,
-    event
+    result: result.AuthenticationResult
   });
 };
 
-export const main = middyfy(hello);
+export const main = middyfy(login, schema);

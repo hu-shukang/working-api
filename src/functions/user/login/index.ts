@@ -1,5 +1,5 @@
-import schema from './schema';
-import { handlerPath } from '@libs/handler-resolver';
+import { handlerPath } from '@libs/lambda';
+import { schema } from './schema';
 
 export default {
   handler: `${handlerPath(__dirname)}/handler.main`,
@@ -7,13 +7,7 @@ export default {
     {
       http: {
         method: 'post',
-        path: 'hello',
-        authorizer: {
-          type: 'COGNITO_USER_POOLS',
-          authorizerId: {
-            Ref: 'CognitoAuthorizer'
-          }
-        },
+        path: '/user/login',
         request: {
           schemas: {
             'application/json': schema
