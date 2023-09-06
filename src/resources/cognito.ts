@@ -4,6 +4,9 @@ export const UserPool = {
     UserPoolName: 'working-user-pool-${opt:stage}',
     UsernameAttributes: ['email'],
     AutoVerifiedAttributes: ['email'],
+    AdminCreateUserConfig: {
+      AllowAdminCreateUserOnly: true
+    },
     Schema: [
       {
         Name: 'email',
@@ -81,6 +84,7 @@ export const UserPoolClient = {
     UserPoolId: {
       Ref: 'UserPool'
     },
+    ExplicitAuthFlows: [],
     SupportedIdentityProviders: ['Google'],
     AllowedOAuthScopes: ['email', 'profile', 'openid'],
     AllowedOAuthFlows: ['implicit'],
