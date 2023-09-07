@@ -80,7 +80,7 @@ export const UserPoolClient = {
   DependsOn: ['UserPoolIdentityProvider'],
   Properties: {
     ClientName: 'working-user-pool-client-${opt:stage}',
-    GenerateSecret: true,
+    GenerateSecret: false,
     UserPoolId: {
       Ref: 'UserPool'
     },
