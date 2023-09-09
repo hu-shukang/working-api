@@ -1,7 +1,6 @@
 import { ValidatedEventAPIGatewayProxyEvent, formatJSONResponse } from '@libs/api-gateway';
 import { middyfy } from '@libs/lambda';
 import { schema, bodySchema } from './schema';
-import { OAuth2Client } from 'google-auth-library';
 import { ParameterLib } from '@libs/parameter.lib';
 import { DynamoDBLib } from '@libs/dynamodb.lib';
 import { Key } from '@models/common.model';
