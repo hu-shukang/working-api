@@ -8,6 +8,7 @@ export default {
       http: {
         method: 'post',
         path: '/user/token',
+        cors: true,
         request: {
           schemas: {
             'application/json': schema
