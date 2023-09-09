@@ -15,6 +15,6 @@ export const middyfy = (handler: any, schema?: object) => {
     const ajv = transpileSchema(schema, { $data: true, allErrors: true, coerceTypes: false });
     func = func.use(validator({ eventSchema: ajv }));
   }
-  func = func.use(cors()).use(httpErrorHandler());
+  func = func.use(httpErrorHandler()).use(cors());
   return func;
 };
