@@ -49,7 +49,7 @@ const serverlessConfiguration: AWS = {
     },
     'serverless-layers': {
       common: {
-        dependenciesPath: './src/layers/common_layer/package.json'
+        dependenciesPath: './package.json'
       }
     }
   }
