@@ -28,9 +28,6 @@ export const middyfy = (handler: any, schema?: object) => {
     const ajv = transpileSchema(schema, { $data: true, allErrors: true, coerceTypes: false });
     func = func.use(validator({ eventSchema: ajv }));
   }
-  func = func
-    .use(httpErrorHandler())
-    .use(addResponseHeaders())
-    .use(cors({ origin: 'http://localhost:3000', methods: 'GET,PUT,POST,DELETE,OPTIONS', credentials: true }));
+  func = func.use(httpErrorHandler()).use(cors({ disableBeforePreflightResponse: false }));
   return func;
 };
