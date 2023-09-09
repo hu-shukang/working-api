@@ -9,6 +9,10 @@ export const WorkingTable = {
       {
         AttributeName: 'sk',
         AttributeType: 'S'
+      },
+      {
+        AttributeName: 'sub',
+        AttributeType: 'S'
       }
     ],
     KeySchema: [
@@ -19,6 +23,20 @@ export const WorkingTable = {
       {
         AttributeName: 'sk',
         KeyType: 'RANGE'
+      }
+    ],
+    GlobalSecondaryIndexes: [
+      {
+        IndexName: 'SUB_IDX',
+        KeySchema: [
+          {
+            AttributeName: 'sub',
+            KeyType: 'HASH'
+          }
+        ],
+        Projection: {
+          ProjectionType: 'ALL'
+        }
       }
     ],
     BillingMode: 'PAY_PER_REQUEST',

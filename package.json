@@ -13,13 +13,15 @@
     "sls:deploy:it": "serverless deploy --stage it",
     "sls:deploy:st": "serverless deploy --stage st",
     "sls:info:it": "serverless info --stage it",
-    "sls:invoke:userLogin": "serverless invoke local --stage it --function userLogin --path src/functions/user/login/mock.json"
+    "sls:invoke:getToken": "serverless invoke local --stage it --function getToken --path src/functions/user/token/get/mock.json"
   },
   "engines": {
     "node": ">=14.15.0"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.409.0",
     "@aws-sdk/client-ssm": "^3.409.0",
+    "@aws-sdk/lib-dynamodb": "^3.409.0",
     "@middy/core": "^3.4.0",
     "@middy/http-error-handler": "^4.6.1",
     "@middy/http-json-body-parser": "^3.4.0",
