@@ -3,7 +3,7 @@ import { WorkingTable } from '@resources/dynamodb';
 import { getToken } from '@functions/index';
 
 const serverlessConfiguration: AWS = {
-  service: 'working-api${env:SUFFIX}',
+  service: 'working-api',
   frameworkVersion: '3',
   useDotenv: true,
   plugins: ['serverless-dotenv-plugin', 'serverless-esbuild'],
