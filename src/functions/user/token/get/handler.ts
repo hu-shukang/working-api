@@ -23,9 +23,7 @@ const token: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async (even
   const dynamodbLib = new DynamoDBLib();
   const key: Key = {
     pkName: 'sub',
-    pkValue: payload.sub,
-    skName: 'sk',
-    skValue: Const.INFO
+    pkValue: payload.sub
   };
   const record = await dynamodbLib.getRecord<EmployeeInfoEntity>(process.env.WORKING_TBL, Const.SUB_IDX, key);
   const employeeInfoViewModel = employeeInfoEntityToViewModel(record);

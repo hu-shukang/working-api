@@ -78,6 +78,7 @@ export class DynamoDBLib {
       ExpressionAttributeNames: expressionAttributeNames,
       ExpressionAttributeValues: expressionAttributeValues
     });
+    console.log(command.input);
     const result = await this.docClient.send(command);
     if (result.Count === 0) {
       return undefined;
