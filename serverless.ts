@@ -48,9 +48,7 @@ const serverlessConfiguration: AWS = {
       concurrency: 10
     },
     'serverless-layers': {
-      common: {
-        dependenciesPath: './package.json'
-      }
+      dependenciesPath: './package.json'
     }
   }
 };
