@@ -2,7 +2,7 @@ import type { AWS } from '@serverless/typescript';
 import { WorkingTable } from '@resources/dynamodb';
 import { getToken } from '@functions/index';
 import { readFileSync } from 'fs';
-import path from 'path';
+import * as path from 'path';
 
 const packageJson = JSON.parse(readFileSync(path.join(__dirname, 'package.json'), 'utf8'));
 const allDependencies = [
