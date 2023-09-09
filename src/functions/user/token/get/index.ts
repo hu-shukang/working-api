@@ -2,7 +2,7 @@ import { handlerPath } from '@libs/lambda';
 
 export default {
   handler: `${handlerPath(__dirname)}/handler.main`,
-  layers: [{ Ref: 'commonLambdaLayer' }],
+  layers: [{ Ref: 'CommonLambdaLayer' }],
   events: [
     {
       http: {
