@@ -18,12 +18,8 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install Layer dependencies
-        run: |
-          cd src/layers/common_layer
-          npm install
-          cd ../../../
-          npm install
+      - name: Install dependencies
+        run: npm install
 
       - name: Deploy with Serverless
         env:
