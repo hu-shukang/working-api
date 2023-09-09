@@ -9,6 +9,19 @@ export const handlerPath = (context: string) => {
   return `${context.split(process.cwd())[1].substring(1).replace(/\\/g, '/')}`;
 };
 
+const addResponseHeaders: any = () => {
+  return {
+    after: (handler: any, next: any) => {
+      handler.response = handler.response || {};
+      handler.response.headers = {
+        ...handler.response.headers,
+        'Access-Control-Allow-Origin': '*'
+      };
+      return next();
+    }
+  };
+};
+
 export const middyfy = (handler: any, schema?: object) => {
   let func = middy(handler).use(middyJsonBodyParser());
   if (schema) {
@@ -17,6 +30,7 @@ export const middyfy = (handler: any, schema?: object) => {
   }
   func = func
     .use(httpErrorHandler())
+    .use(addResponseHeaders())
     .use(cors({ origin: 'http://localhost:3000', methods: 'GET,PUT,POST,DELETE,OPTIONS', credentials: true }));
   return func;
 };
