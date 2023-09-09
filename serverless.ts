@@ -1,6 +1,14 @@
 import type { AWS } from '@serverless/typescript';
 import { WorkingTable } from '@resources/dynamodb';
 import { getToken } from '@functions/index';
+import { readFileSync } from 'fs';
+import path from 'path';
+
+const packageJson = JSON.parse(readFileSync(path.join(__dirname, 'package.json'), 'utf8'));
+const allDependencies = [
+  ...Object.keys(packageJson.dependencies || {}),
+  ...Object.keys(packageJson.devDependencies || {})
+];
 
 const serverlessConfiguration: AWS = {
   service: 'working-api',
@@ -39,7 +47,7 @@ const serverlessConfiguration: AWS = {
       bundle: true,
       minify: false,
       sourcemap: true,
-      external: ['*'],
+      external: allDependencies,
       exclude: ['aws-sdk'],
       target: 'node18',
       define: { 'require.resolve': undefined },
