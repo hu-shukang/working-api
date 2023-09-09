@@ -19,11 +19,12 @@
     "node": ">=14.15.0"
   },
   "dependencies": {
-    "@aws-sdk/client-cognito-identity-provider": "^3.405.0",
+    "@aws-sdk/client-ssm": "^3.409.0",
     "@middy/core": "^3.4.0",
     "@middy/http-error-handler": "^4.6.1",
     "@middy/http-json-body-parser": "^3.4.0",
-    "@middy/validator": "^4.6.1"
+    "@middy/validator": "^4.6.1",
+    "google-auth-library": "^9.0.0"
   },
   "devDependencies": {
     "@serverless/typescript": "^3.0.0",

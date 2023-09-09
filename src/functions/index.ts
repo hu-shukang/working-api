@@ -1,1 +1,1 @@
-export { default as userLogin } from './user/login';
+export { default as getToken } from './user/token/get';

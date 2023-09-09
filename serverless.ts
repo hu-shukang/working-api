@@ -1,8 +1,6 @@
 import type { AWS } from '@serverless/typescript';
-import { UserPool, UserPoolClient, UserPoolDomain, UserPoolIdentityProvider } from '@resources/cognito';
 import { WorkingTable } from '@resources/dynamodb';
-import { CognitoAuthorizer } from '@resources/authorizer';
-import { userLogin } from '@functions/index';
+import { getToken } from '@functions/index';
 
 const serverlessConfiguration: AWS = {
   service: 'working-api',
@@ -22,19 +20,12 @@ const serverlessConfiguration: AWS = {
   },
   resources: {
     Resources: {
-      // Cognito
-      UserPool,
-      UserPoolDomain,
-      UserPoolIdentityProvider,
-      UserPoolClient,
       // DynamoDB
-      WorkingTable,
-      // ApiGateway
-      CognitoAuthorizer
+      WorkingTable
     }
   },
   // import the function via paths
-  functions: { userLogin },
+  functions: { getToken },
   package: { individually: true },
   custom: {
     esbuild: {
@@ -47,9 +38,6 @@ const serverlessConfiguration: AWS = {
       platform: 'node',
       concurrency: 10
     }
-    // dotenv: {
-    //   path: "env/.env.${opt:stage}"
-    // }
   }
 };
 
