@@ -28,12 +28,12 @@ const serverlessConfiguration: AWS = {
   // import the function via paths
   functions: { getToken },
   layers: {
-    commonLayer: {
+    common: {
       path: 'src/layers/common_layer',
       description: 'common layer'
     }
   },
-  package: { individually: true },
+  package: { individually: true, exclude: ['src/layers/**'] },
   custom: {
     esbuild: {
       bundle: true,
