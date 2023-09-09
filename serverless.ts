@@ -3,7 +3,7 @@ import { WorkingTable } from '@resources/dynamodb';
 import { getToken } from '@functions/index';
 
 const serverlessConfiguration: AWS = {
-  service: 'working-api',
+  service: 'working-api${env:SUFFIX}',
   frameworkVersion: '3',
   useDotenv: true,
   plugins: ['serverless-dotenv-plugin', 'serverless-esbuild'],
@@ -14,6 +14,7 @@ const serverlessConfiguration: AWS = {
     deploymentBucket: { name: 'working-api-deploy' },
     role: '${env:LAMBDA_ROLE}',
     apiGateway: {
+      stage: 'api',
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true
     }
