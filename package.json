@@ -13,7 +13,8 @@
     "sls:deploy:it": "serverless deploy --stage it",
     "sls:deploy:st": "serverless deploy --stage st",
     "sls:info:it": "serverless info --stage it",
-    "sls:invoke:getToken": "serverless invoke local --stage it --function getToken --path src/functions/user/token/get/mock.json"
+    "sls:invoke:getToken": "serverless invoke local --stage it --function getToken --path src/functions/user/token/get/mock.json",
+    "sls:invoke:refreshToken": "serverless invoke local --stage it --function refreshToken --path src/functions/user/token/refresh/mock.json"
   },
   "engines": {
     "node": ">=14.15.0"

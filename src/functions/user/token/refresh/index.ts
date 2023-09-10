@@ -1,3 +1,4 @@
+import { Const } from '@libs/const.lib';
 import { handlerPath } from '@libs/lambda';
 
 export default {
@@ -9,7 +10,7 @@ export default {
         path: '/user/token/refresh',
         cors: true,
         authorizer: {
-          name: 'tokenAuthorizer'
+          name: Const.TOKEN_AUTHORIZER
         }
       }
     }

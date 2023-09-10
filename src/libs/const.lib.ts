@@ -4,5 +4,7 @@ export const Const = {
   INFO: 'INFO',
   // Google
   GOOGLE_CLIENT_ID_NAME: '/working-api/google-client-id',
-  GOOGLE_CLIENT_SECRET_NAME: '/working-api/google-client-secret'
+  GOOGLE_CLIENT_SECRET_NAME: '/working-api/google-client-secret',
+  // APIGateway
+  TOKEN_AUTHORIZER: 'tokenAuthorizer'
 } as const;

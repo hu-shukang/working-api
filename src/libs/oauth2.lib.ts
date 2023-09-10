@@ -12,14 +12,14 @@ export class OAuth2Lib {
     return this.formatCredentials(tokens);
   }
 
-  public async getPayload(accessToken: string): Promise<TokenPayload> {
-    const ticket = await this.oauth2Client.verifyIdToken({ idToken: accessToken });
+  public async getPayload(idToken: string): Promise<TokenPayload> {
+    const ticket = await this.oauth2Client.verifyIdToken({ idToken: idToken });
     return ticket.getPayload();
   }
 
-  public async refreshAccessToken(accessToken: string, refreshToken: string) {
+  public async refreshTokens(idToken: string, refreshToken: string) {
     this.oauth2Client.setCredentials({
-      access_token: accessToken,
+      id_token: idToken,
       refresh_token: refreshToken
     });
     const { credentials } = await this.oauth2Client.refreshAccessToken();

@@ -16,7 +16,7 @@ const token: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async (even
 
   const oauth2Lib = new OAuth2Lib(clientId, clientSecret);
   const tokens = await oauth2Lib.getToken(code);
-  const payload = await oauth2Lib.getPayload(tokens.accessToken);
+  const payload = await oauth2Lib.getPayload(tokens.idToken);
 
   const dynamodbLib = new DynamoDBLib();
   const key: Key = {
