@@ -7,6 +7,7 @@ import { Key } from '@models/common.model';
 import { Const } from '@libs/const.lib';
 import { OAuth2Lib } from '@libs/oauth2.lib';
 import { EmployeeInfoEntity, employeeInfoEntityToViewModel } from '@models/user.model';
+import { NoFoundEmployeeError } from '@models/error.model';
 
 const token: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async (event) => {
   const { provider, code } = event.body;
@@ -24,6 +25,9 @@ const token: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async (even
     pkValue: payload.sub
   };
   const record = await dynamodbLib.getRecord<EmployeeInfoEntity>(process.env.WORKING_TBL, Const.SUB_IDX, key);
+  if (record === undefined || record.deleted) {
+    throw new NoFoundEmployeeError();
+  }
   const employeeInfoViewModel = employeeInfoEntityToViewModel(record);
 
   return formatJSONResponse({

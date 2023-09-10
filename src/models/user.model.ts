@@ -13,6 +13,8 @@ export type EmployeeInfoEntity = {
   sub: string;
   /** 入社日 */
   hireDate: number;
+  /** 権限 */
+  role: string;
   /** 削除フラグ */
   deleted: boolean;
 } & CommonAttributes &
@@ -23,6 +25,8 @@ export type EmployeeInfoViewModel = {
   id: string;
   /** 入社日 */
   hireDate: number;
+  /** 権限 */
+  role: string;
 };
 
 export const employeeInfoEntityToViewModel = (
@@ -33,6 +37,7 @@ export const employeeInfoEntityToViewModel = (
   }
   return {
     id: entity.pk,
-    hireDate: entity.hireDate
+    hireDate: entity.hireDate,
+    role: entity.role
   };
 };
