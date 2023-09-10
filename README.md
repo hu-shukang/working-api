@@ -15,10 +15,10 @@ Depending on your preferred package manager, follow the instructions below to de
 - Run `npm i` to install the project dependencies
 - Run `npx sls deploy` to deploy this stack to AWS
 
-### Using Yarn
+### Using npm run
 
-- Run `yarn` to install the project dependencies
-- Run `yarn sls deploy` to deploy this stack to AWS
+- Run `npm run` to install the project dependencies
+- Run `npm run sls deploy` to deploy this stack to AWS
 
 ## Test your service
 
@@ -35,7 +35,7 @@ This template contains a single lambda function triggered by an HTTP request mad
 In order to test the hello function locally, run the following command:
 
 - `npx sls invoke local -f hello --path src/functions/hello/mock.json` if you're using NPM
-- `yarn sls invoke local -f hello --path src/functions/hello/mock.json` if you're using Yarn
+- `npm run sls invoke local -f hello --path src/functions/hello/mock.json` if you're using npm run
 
 Check the [sls invoke local command documentation](https://www.serverless.com/framework/docs/providers/aws/cli-reference/invoke-local/) for more information.
 
