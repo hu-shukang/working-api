@@ -32,9 +32,8 @@ const serverlessConfiguration: AWS = {
       WorkingTable
     }
   },
-  // import the function via paths
   functions: { getToken, refreshToken, tokenAuthorizer },
-  package: { individually: true, exclude: ['src/layers/**'], excludeDevDependencies: true },
+  package: { individually: true },
   custom: {
     esbuild: {
       bundle: true,
