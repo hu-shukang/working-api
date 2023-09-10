@@ -1,6 +1,6 @@
 import type { AWS } from '@serverless/typescript';
 import { WorkingTable } from '@resources/dynamodb';
-import { getToken } from '@functions/index';
+import { getToken, refreshToken, tokenAuthorizer } from '@functions/index';
 import { readFileSync } from 'fs';
 import * as path from 'path';
 
@@ -33,7 +33,7 @@ const serverlessConfiguration: AWS = {
     }
   },
   // import the function via paths
-  functions: { getToken },
+  functions: { getToken, refreshToken, tokenAuthorizer },
   package: { individually: true, exclude: ['src/layers/**'], excludeDevDependencies: true },
   custom: {
     esbuild: {

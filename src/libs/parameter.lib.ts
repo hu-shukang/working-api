@@ -1,10 +1,20 @@
 import { SSMClient, GetParametersCommand, Parameter, GetParameterCommand } from '@aws-sdk/client-ssm';
+import { Const } from './const.lib';
 
 export class ParameterLib {
   private client: SSMClient;
 
   constructor() {
     this.client = new SSMClient();
+  }
+
+  public async getGoogleClientParameter() {
+    const names = [Const.GOOGLE_CLIENT_ID_NAME, Const.GOOGLE_CLIENT_SECRET_NAME];
+    const [clientIdParam, clientSecretParam] = await this.getParameters(names);
+    return {
+      clientId: clientIdParam.Value,
+      clientSecret: clientSecretParam.Value
+    };
   }
 
   public async getParameters(names: string[]): Promise<Parameter[]> {

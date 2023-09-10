@@ -1,4 +1,8 @@
 export const Const = {
+  // DynamoDB
   SUB_IDX: 'SUB_IDX',
-  INFO: 'INFO'
+  INFO: 'INFO',
+  // Google
+  GOOGLE_CLIENT_ID_NAME: '/working-api/google-client-id',
+  GOOGLE_CLIENT_SECRET_NAME: '/working-api/google-client-secret'
 } as const;

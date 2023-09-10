@@ -12,12 +12,11 @@ const token: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async (even
   const { provider, code } = event.body;
   console.log(provider, code);
   const parameterLib = new ParameterLib();
-  const names = ['/working-api/google-client-id', '/working-api/google-client-secret'];
-  const [clientIdParam, clientSecretParam] = await parameterLib.getParameters(names);
+  const { clientId, clientSecret } = await parameterLib.getGoogleClientParameter();
 
-  const oauth2Lib = new OAuth2Lib(clientIdParam.Value, clientSecretParam.Value);
+  const oauth2Lib = new OAuth2Lib(clientId, clientSecret);
   const tokens = await oauth2Lib.getToken(code);
-  const payload = await oauth2Lib.getPayload(tokens.id_token);
+  const payload = await oauth2Lib.getPayload(tokens.accessToken);
 
   const dynamodbLib = new DynamoDBLib();
   const key: Key = {
@@ -28,12 +27,7 @@ const token: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async (even
   const employeeInfoViewModel = employeeInfoEntityToViewModel(record);
 
   return formatJSONResponse({
-    accessToken: tokens.access_token,
-    idToken: tokens.id_token,
-    refreshToken: tokens.refresh_token,
-    tokenType: tokens.token_type,
-    expiryDate: tokens.expiry_date,
-    scope: tokens.scope,
+    ...tokens,
     info: employeeInfoViewModel
   });
 };
