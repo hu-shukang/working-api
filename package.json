@@ -6,8 +6,8 @@
   "scripts": {
     "lint:js": "eslint --ext \".ts\" --ignore-path .gitignore .",
     "lint:prettier": "prettier --check .",
-    "lint": "yarn lint:js && yarn lint:prettier",
-    "lint:fix": "prettier --write --list-different . && yarn lint:js --fix",
+    "lint": "npm run lint:js && npm run lint:prettier",
+    "lint:fix": "prettier --write --list-different . && npm run lint:js --fix",
     "sls:remove:it": "serverless remove --stage it",
     "sls:remove:st": "serverless remove --stage st",
     "sls:deploy:it": "serverless deploy --stage it",
@@ -18,7 +18,7 @@
   "engines": {
     "node": ">=14.15.0"
   },
-  "dependencies": {
+  "devDependencies": {
     "@aws-sdk/client-dynamodb": "^3.409.0",
     "@aws-sdk/client-ssm": "^3.409.0",
     "@aws-sdk/lib-dynamodb": "^3.409.0",
@@ -27,9 +27,7 @@
     "@middy/http-error-handler": "^4.6.1",
     "@middy/http-json-body-parser": "^3.4.0",
     "@middy/validator": "^4.6.1",
-    "google-auth-library": "^9.0.0"
-  },
-  "devDependencies": {
+    "google-auth-library": "^9.0.0",
     "@serverless/typescript": "^3.0.0",
     "@types/aws-lambda": "^8.10.71",
     "@types/node": "^14.14.25",
