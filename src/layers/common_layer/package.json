@@ -16,6 +16,8 @@
     "@middy/http-cors": "^4.6.1",
     "@middy/http-json-body-parser": "^3.4.0",
     "@middy/validator": "^4.6.1",
-    "google-auth-library": "^9.0.0"
+    "dayjs": "^1.11.9",
+    "google-auth-library": "^9.0.0",
+    "uuid": "^9.0.0"
   }
 }

@@ -1,5 +1,5 @@
 import { DynamoDB } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, GetCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, GetCommand, QueryCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { Key } from '@models/common.model';
 
 export class DynamoDBLib {
@@ -50,6 +50,18 @@ export class DynamoDBLib {
       return this.getRecordWithGSI<T>(p1, p2 as string, p3);
     }
     return this.getRecordWithPK<T>(p1, p2 as Key);
+  }
+
+  public async addRecord(tableName: string, key: Record<string, any>, attributes: Record<string, any>) {
+    const command = new PutCommand({
+      TableName: tableName,
+      Item: {
+        ...attributes,
+        ...key
+      },
+      ConditionExpression: 'attribute_not_exists(pk) and attribute_not_exists(sk)'
+    });
+    return await this.docClient.send(command);
   }
 
   private async getRecordWithPK<T>(tableName: string, key: Key): Promise<T | undefined> {

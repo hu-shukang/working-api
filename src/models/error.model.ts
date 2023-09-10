@@ -7,9 +7,9 @@ export abstract class HttpError extends Error {
   abstract get businessErrorCode(): string;
 }
 
-export class NoFoundEmployeeError extends HttpError {
+export class EmployeeDeletedError extends HttpError {
   constructor() {
-    super('ユーザは登録されておりません。管理者にご連絡ください。');
+    super('ユーザは削除されてました。管理者にご連絡ください。');
   }
 
   get statusCode(): number {

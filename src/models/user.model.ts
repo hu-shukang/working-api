@@ -15,6 +15,20 @@ export type EmployeeInfoEntity = {
   hireDate: number;
   /** 権限 */
   role: string;
+  /** 部門ID */
+  department: string;
+  /** 部門名 */
+  departmentName: string;
+  /** メール */
+  email: string;
+  /** 苗字 */
+  familyName: string;
+  /** 名前 */
+  givenName: '書康';
+  /** アバター */
+  picture: 'https://lh3.googleusercontent.com/a/ACg8ocLhE8n7tvJewx1rcU-mcQ9FMGXmkEMRYxix5cfCnhRp=s96-c';
+  /** 登録ステータス */
+  signupStatus: string;
   /** 削除フラグ */
   deleted: boolean;
 } & CommonAttributes &
@@ -27,6 +41,12 @@ export type EmployeeInfoViewModel = {
   hireDate: number;
   /** 権限 */
   role: string;
+  /** 部門ID */
+  department: string;
+  /** 部門名 */
+  departmentName: string;
+  /** 登録ステータス */
+  signupStatus: string;
 };
 
 export const employeeInfoEntityToViewModel = (
@@ -38,6 +58,9 @@ export const employeeInfoEntityToViewModel = (
   return {
     id: entity.pk,
     hireDate: entity.hireDate,
-    role: entity.role
+    role: entity.role,
+    department: entity.department,
+    departmentName: entity.departmentName,
+    signupStatus: entity.signupStatus
   };
 };
