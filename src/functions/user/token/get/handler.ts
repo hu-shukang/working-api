@@ -69,7 +69,7 @@ const getToken: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async (e
   const employeeInfoViewModel = employeeInfoEntityToViewModel(record);
 
   return formatJSONResponse({
-    ...tokens,
+    tokens: tokens,
     info: employeeInfoViewModel
   });
 };
