@@ -38,8 +38,11 @@ const addEmployeeInfo = async (dynamodbLib: DynamoDBLib, payload: TokenPayload):
     sub: payload.sub,
     signupStatus: Const.PENDING
   };
-  const result = await dynamodbLib.addRecord(process.env.WORKING_TBL, key, attributes);
-  return result.Attributes as EmployeeInfoEntity;
+  await dynamodbLib.addRecord(process.env.WORKING_TBL, key, attributes);
+  return {
+    ...key,
+    ...attributes
+  } as EmployeeInfoEntity;
 };
 
 const getToken: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async (event) => {

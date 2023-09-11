@@ -24,9 +24,9 @@ export type EmployeeInfoEntity = {
   /** 苗字 */
   familyName: string;
   /** 名前 */
-  givenName: '書康';
+  givenName: string;
   /** アバター */
-  picture: 'https://lh3.googleusercontent.com/a/ACg8ocLhE8n7tvJewx1rcU-mcQ9FMGXmkEMRYxix5cfCnhRp=s96-c';
+  picture: string;
   /** 登録ステータス */
   signupStatus: string;
   /** 削除フラグ */
@@ -41,6 +41,12 @@ export type EmployeeInfoViewModel = {
   hireDate: number;
   /** 権限 */
   role: string;
+  /** 苗字 */
+  familyName: string;
+  /** 名前 */
+  givenName: string;
+  /** アバター */
+  picture: string;
   /** 部門ID */
   department: string;
   /** 部門名 */
@@ -59,6 +65,9 @@ export const employeeInfoEntityToViewModel = (
     id: entity.pk,
     hireDate: entity.hireDate,
     role: entity.role,
+    familyName: entity.familyName,
+    givenName: entity.givenName,
+    picture: entity.picture,
     department: entity.department,
     departmentName: entity.departmentName,
     signupStatus: entity.signupStatus
