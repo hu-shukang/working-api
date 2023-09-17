@@ -5,6 +5,18 @@ import validator from '@middy/validator';
 import { transpileSchema } from '@middy/validator/transpile';
 import cors from '@middy/http-cors';
 import { HttpError } from '@models/error.model';
+import type { APIGatewayProxyEvent, APIGatewayProxyResult, Handler } from 'aws-lambda';
+import type { FromSchema } from 'json-schema-to-ts';
+
+type ValidatedAPIGatewayProxyEvent<S> = Omit<APIGatewayProxyEvent, 'body'> & { body: FromSchema<S> };
+export type ValidatedEventAPIGatewayProxyEvent<S> = Handler<ValidatedAPIGatewayProxyEvent<S>, APIGatewayProxyResult>;
+
+export const formatJSONResponse = (response: Record<string, unknown>) => {
+  return {
+    statusCode: 200,
+    body: JSON.stringify(response)
+  };
+};
 
 export const handlerPath = (context: string) => {
   return `${context.split(process.cwd())[1].substring(1).replace(/\\/g, '/')}`;

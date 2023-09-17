@@ -1,5 +1,4 @@
-import { ValidatedEventAPIGatewayProxyEvent, formatJSONResponse } from '@libs/api-gateway';
-import { middyfy } from '@libs/lambda';
+import { middyfy, ValidatedEventAPIGatewayProxyEvent, formatJSONResponse } from '@libs/lambda';
 import { schema, bodySchema } from './schema';
 import { ParameterLib } from '@libs/parameter.lib';
 import { DynamoDBLib } from '@libs/dynamodb.lib';
