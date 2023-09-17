@@ -5,11 +5,11 @@ import validator from '@middy/validator';
 import { transpileSchema } from '@middy/validator/transpile';
 import cors from '@middy/http-cors';
 import { HttpError } from '@models/error.model';
-import type { APIGatewayProxyEvent, APIGatewayProxyResult, Handler } from 'aws-lambda';
+import type { APIGatewayProxyEvent, Handler } from 'aws-lambda';
 import type { FromSchema } from 'json-schema-to-ts';
 
 type ValidatedAPIGatewayProxyEvent<S> = Omit<APIGatewayProxyEvent, 'body'> & { body: FromSchema<S> };
-export type ValidatedEventAPIGatewayProxyEvent<S> = Handler<ValidatedAPIGatewayProxyEvent<S>, APIGatewayProxyResult>;
+export type ValidatedEventAPIGatewayProxyEvent<S> = Handler<ValidatedAPIGatewayProxyEvent<S>, any>;
 
 export const formatJSONResponse = (response: Record<string, unknown>) => {
   return {
@@ -20,6 +20,21 @@ export const formatJSONResponse = (response: Record<string, unknown>) => {
 
 export const handlerPath = (context: string) => {
   return `${context.split(process.cwd())[1].substring(1).replace(/\\/g, '/')}`;
+};
+
+const responseParser = (): middy.MiddlewareObj => {
+  return {
+    after: async (request) => {
+      if (request.response !== undefined) return;
+      request.response = {
+        statusCode: 200,
+        body: JSON.stringify(request.response),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+    }
+  };
 };
 
 const customErrorHandler = (): middy.MiddlewareObj => {
@@ -40,8 +55,7 @@ const customErrorHandler = (): middy.MiddlewareObj => {
         statusCode,
         body: JSON.stringify({ error: message, businessErrorCode: businessErrorCode }),
         headers: {
-          ...request.response.headers,
-          'Content-Type': 'application/json'
+          ...request.response.headers
         }
       };
     }
@@ -49,7 +63,7 @@ const customErrorHandler = (): middy.MiddlewareObj => {
 };
 
 export const middyfy = (handler: any, schema?: object) => {
-  let func = middy(handler).use(middyJsonBodyParser());
+  let func = middy(handler).use(middyJsonBodyParser()).use(responseParser());
   if (schema) {
     const ajv = transpileSchema(schema, { $data: true, allErrors: true, coerceTypes: false });
     func = func.use(validator({ eventSchema: ajv }));

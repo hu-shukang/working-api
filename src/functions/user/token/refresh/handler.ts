@@ -1,4 +1,4 @@
-import { middyfy, ValidatedEventAPIGatewayProxyEvent, formatJSONResponse, ParameterUtil, OAuth2Util } from '@utils';
+import { middyfy, ValidatedEventAPIGatewayProxyEvent, ParameterUtil, OAuth2Util } from '@utils';
 import { schema, bodySchema } from './schema';
 
 const refresh: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async (event) => {
@@ -10,9 +10,9 @@ const refresh: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async (ev
   const oauth2Util = new OAuth2Util(clientId, clientSecret);
   const tokens = await oauth2Util.refreshTokens(idToken, refreshToken);
 
-  return formatJSONResponse({
+  return {
     ...tokens
-  });
+  };
 };
 
 export const main = middyfy(refresh, schema);

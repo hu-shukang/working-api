@@ -1,7 +1,6 @@
 import {
   middyfy,
   ValidatedEventAPIGatewayProxyEvent,
-  formatJSONResponse,
   ParameterUtil,
   DynamoDBUtil,
   Const,
@@ -72,10 +71,10 @@ const getToken: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async (e
   }
   const employeeInfoViewModel = employeeInfoEntityToViewModel(record);
 
-  return formatJSONResponse({
+  return {
     tokens: tokens,
     info: employeeInfoViewModel
-  });
+  };
 };
 
 export const main = middyfy(getToken, schema);
