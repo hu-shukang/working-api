@@ -1,4 +1,4 @@
-import { handlerPath } from '@libs/lambda';
+import { handlerPath } from '@utils/lambda.util';
 
 export default {
   handler: `${handlerPath(__dirname)}/handler.main`,

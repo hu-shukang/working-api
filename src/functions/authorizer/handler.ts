@@ -1,5 +1,4 @@
-import { OAuth2Lib } from '@libs/oauth2.lib';
-import { ParameterLib } from '@libs/parameter.lib';
+import { OAuth2Util, ParameterUtil } from '@utils';
 import { APIGatewayTokenAuthorizerEvent, CustomAuthorizerResult, Context, Callback } from 'aws-lambda';
 
 const generatePolicy = (
@@ -28,10 +27,10 @@ const generatePolicy = (
 export const main = async (event: APIGatewayTokenAuthorizerEvent, _context: Context, callback: Callback) => {
   try {
     const token = event.authorizationToken;
-    const parameterLib = new ParameterLib();
-    const { clientId, clientSecret } = await parameterLib.getGoogleClientParameter();
-    const oauth2Lib = new OAuth2Lib(clientId, clientSecret);
-    const payload = await oauth2Lib.getPayload(token);
+    const parameterUtil = new ParameterUtil();
+    const { clientId, clientSecret } = await parameterUtil.getGoogleClientParameter();
+    const oauth2Util = new OAuth2Util(clientId, clientSecret);
+    const payload = await oauth2Util.getPayload(token);
     if (payload) {
       const policy = generatePolicy(event, 'Allow', payload);
       callback(null, policy);

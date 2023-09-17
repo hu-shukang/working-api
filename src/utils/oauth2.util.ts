@@ -1,6 +1,6 @@
 import { Credentials, OAuth2Client, TokenPayload } from 'google-auth-library';
 
-export class OAuth2Lib {
+export class OAuth2Util {
   private oauth2Client: OAuth2Client;
 
   constructor(clientId: string, clientSecret: string) {

@@ -2,7 +2,7 @@ import { DynamoDB } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, GetCommand, QueryCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { Key } from '@models/common.model';
 
-export class DynamoDBLib {
+export class DynamoDBUtil {
   protected docClient: DynamoDBDocumentClient;
 
   constructor() {

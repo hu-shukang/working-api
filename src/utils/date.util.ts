@@ -5,7 +5,7 @@ import ja from 'dayjs/locale/ja';
 
 type DayjsDate = string | number | dayjs.Dayjs | Date | null | undefined;
 
-class DateLib {
+class DateUtil {
   constructor() {
     dayjs.extend(timezone);
     dayjs.extend(utc);
@@ -18,4 +18,4 @@ class DateLib {
   }
 }
 
-export const dateLib = new DateLib();
+export const dateUtil = new DateUtil();

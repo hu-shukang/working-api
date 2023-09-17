@@ -1,7 +1,7 @@
 import { SSMClient, GetParametersCommand, Parameter, GetParameterCommand } from '@aws-sdk/client-ssm';
-import { Const } from './const.lib';
+import { Const } from './const.util';
 
-export class ParameterLib {
+export class ParameterUtil {
   private client: SSMClient;
 
   constructor() {

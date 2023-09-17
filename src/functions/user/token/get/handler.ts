@@ -1,32 +1,34 @@
-import { middyfy, ValidatedEventAPIGatewayProxyEvent, formatJSONResponse } from '@libs/lambda';
+import {
+  middyfy,
+  ValidatedEventAPIGatewayProxyEvent,
+  formatJSONResponse,
+  ParameterUtil,
+  DynamoDBUtil,
+  Const,
+  OAuth2Util,
+  stringUtil,
+  dateUtil
+} from '@utils';
 import { schema, bodySchema } from './schema';
-import { ParameterLib } from '@libs/parameter.lib';
-import { DynamoDBLib } from '@libs/dynamodb.lib';
-import { Key } from '@models/common.model';
-import { Const } from '@libs/const.lib';
-import { OAuth2Lib } from '@libs/oauth2.lib';
-import { EmployeeInfoEntity, employeeInfoEntityToViewModel } from '@models/user.model';
-import { EmployeeDeletedError } from '@models/error.model';
+import { Key, EmployeeInfoEntity, employeeInfoEntityToViewModel, EmployeeDeletedError } from '@models';
 import { TokenPayload } from 'google-auth-library';
-import { stringLib } from '@libs/string.lib';
-import { dateLib } from '@libs/date.lib';
 
 /**
  * 社員情報を仮登録する
  *
- * @param dynamodbLib DynamoDBLib
+ * @param dynamodbUtil DynamoDBUtil
  * @param payload TokenPayload
  * @returns 仮の社員ID
  */
-const addEmployeeInfo = async (dynamodbLib: DynamoDBLib, payload: TokenPayload): Promise<EmployeeInfoEntity> => {
-  const tempEmployeeId = stringLib.uuid();
+const addEmployeeInfo = async (dynamodbUtil: DynamoDBUtil, payload: TokenPayload): Promise<EmployeeInfoEntity> => {
+  const tempEmployeeId = stringUtil.uuid();
   const key = {
     pk: tempEmployeeId,
     sk: Const.INFO
   };
   const attributes = {
     type: Const.EMPLOYEE_INFO,
-    createDate: dateLib.unix(),
+    createDate: dateUtil.unix(),
     createUser: 'INIT',
     deleted: false,
     email: payload.email,
@@ -37,7 +39,7 @@ const addEmployeeInfo = async (dynamodbLib: DynamoDBLib, payload: TokenPayload):
     sub: payload.sub,
     signupStatus: Const.PENDING
   };
-  await dynamodbLib.addRecord(process.env.WORKING_TBL, key, attributes);
+  await dynamodbUtil.addRecord(process.env.WORKING_TBL, key, attributes);
   return {
     ...key,
     ...attributes
@@ -47,21 +49,21 @@ const addEmployeeInfo = async (dynamodbLib: DynamoDBLib, payload: TokenPayload):
 const getToken: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async (event) => {
   const { provider, code } = event.body;
   console.log(provider, code);
-  const parameterLib = new ParameterLib();
-  const { clientId, clientSecret } = await parameterLib.getGoogleClientParameter();
+  const parameterUtil = new ParameterUtil();
+  const { clientId, clientSecret } = await parameterUtil.getGoogleClientParameter();
 
-  const oauth2Lib = new OAuth2Lib(clientId, clientSecret);
-  const tokens = await oauth2Lib.getToken(code);
-  const payload = await oauth2Lib.getPayload(tokens.idToken);
+  const oauth2Util = new OAuth2Util(clientId, clientSecret);
+  const tokens = await oauth2Util.getToken(code);
+  const payload = await oauth2Util.getPayload(tokens.idToken);
   console.log(payload);
-  const dynamodbLib = new DynamoDBLib();
+  const dynamodbUtil = new DynamoDBUtil();
   const key: Key = {
     pkName: 'sub',
     pkValue: payload.sub
   };
-  let record = await dynamodbLib.getRecord<EmployeeInfoEntity>(process.env.WORKING_TBL, Const.SUB_IDX, key);
+  let record = await dynamodbUtil.getRecord<EmployeeInfoEntity>(process.env.WORKING_TBL, Const.SUB_IDX, key);
   if (record === undefined) {
-    record = await addEmployeeInfo(dynamodbLib, payload);
+    record = await addEmployeeInfo(dynamodbUtil, payload);
     console.log('仮登録社員情報：');
     console.log(record);
   }

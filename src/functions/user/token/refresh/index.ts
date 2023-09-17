@@ -1,5 +1,4 @@
-import { Const } from '@libs/const.lib';
-import { handlerPath } from '@libs/lambda';
+import { Const, handlerPath } from '@utils';
 
 export default {
   handler: `${handlerPath(__dirname)}/handler.main`,
