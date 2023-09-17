@@ -13,7 +13,6 @@
     "@aws-sdk/client-ssm": "^3.409.0",
     "@aws-sdk/lib-dynamodb": "^3.409.0",
     "@middy/core": "^3.4.0",
-    "@middy/http-cors": "^4.6.1",
     "@middy/http-json-body-parser": "^3.4.0",
     "@middy/validator": "^4.6.1",
     "dayjs": "^1.11.9",
