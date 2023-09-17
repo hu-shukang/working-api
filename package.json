@@ -23,6 +23,7 @@
     "@aws-sdk/client-dynamodb": "^3.409.0",
     "@aws-sdk/client-ssm": "^3.409.0",
     "@aws-sdk/lib-dynamodb": "^3.409.0",
+    "@middy/core": "^4.6.2",
     "@middy/http-json-body-parser": "^3.4.0",
     "@middy/validator": "^4.6.1",
     "@serverless/typescript": "^3.0.0",
@@ -50,8 +51,5 @@
     "uuid": "^9.0.0"
   },
   "author": "The serverless webpack authors (https://github.com/elastic-coders/serverless-webpack)",
-  "license": "MIT",
-  "dependencies": {
-    "@middy/core": "^4.6.2"
-  }
+  "license": "MIT"
 }
