@@ -5,6 +5,20 @@ export type Key = {
   skValue?: any;
 };
 
+export type RequiredKey = Required<Key>;
+
+export type PK = {
+  pkName: string;
+  pkValue: any;
+};
+
+export type KeyBeginWith = {
+  pkName: string;
+  pkValue: any;
+  skName?: string;
+  skValue?: any;
+};
+
 export type CommonAttributes = {
   /** パーティションキー */
   pk: string;
@@ -16,11 +30,11 @@ export type CommonAttributes = {
 
 export type CreateUpdateAttributes = {
   /** 作成日時 */
-  createDate: number;
+  createDate?: number;
   /** 作成者 */
-  createUser: string;
+  createUser?: string;
   /** 更新日時 */
-  updateDate: number;
+  updateDate?: number;
   /** 更新者 */
-  updateUser: string;
+  updateUser?: string;
 };
