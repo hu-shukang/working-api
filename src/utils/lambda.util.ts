@@ -6,6 +6,7 @@ import { transpileSchema } from '@middy/validator/transpile';
 import { HttpError } from '@models/error.model';
 import type { APIGatewayProxyEvent, Handler } from 'aws-lambda';
 import type { FromSchema } from 'json-schema-to-ts';
+import { BusinessErrorCodeMessages, BusinessErrorCodes } from './const.util';
 
 type ValidatedAPIGatewayProxyEvent<S> = Omit<APIGatewayProxyEvent, 'body'> & { body: FromSchema<S> };
 export type ValidatedEventAPIGatewayProxyEvent<S> = Handler<ValidatedAPIGatewayProxyEvent<S>, any>;
@@ -41,13 +42,18 @@ const customErrorHandler = (): middy.MiddlewareObj => {
         const error = request.error as HttpError;
         statusCode = error.statusCode;
         businessErrorCode = error.businessErrorCode;
+      } else if (request.error.name === 'BadRequestError') {
+        console.debug(request.error);
+        statusCode = (request.error as any).statusCode;
+        businessErrorCode = BusinessErrorCodes.S00;
+        request.error.message = BusinessErrorCodeMessages.S00;
       }
       const message = request.error.message || 'Internal server error';
       normalizeHttpResponse(request);
       request.response = {
         ...request.response,
         statusCode,
-        body: JSON.stringify({ error: message, businessErrorCode: businessErrorCode }),
+        body: JSON.stringify({ error: message, businessErrorCode: businessErrorCode ?? BusinessErrorCodes.S99 }),
         headers: {
           ...request.response.headers
         }

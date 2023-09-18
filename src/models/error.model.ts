@@ -1,3 +1,5 @@
+import { BusinessErrorCodeMessages, BusinessErrorCodes } from '@utils';
+
 export abstract class HttpError extends Error {
   constructor(message: string) {
     super(message);
@@ -9,7 +11,7 @@ export abstract class HttpError extends Error {
 
 export class EmployeeDeletedError extends HttpError {
   constructor() {
-    super('ユーザは削除されてました。管理者にご連絡ください。');
+    super(BusinessErrorCodeMessages.S01);
   }
 
   get statusCode(): number {
@@ -17,6 +19,6 @@ export class EmployeeDeletedError extends HttpError {
   }
 
   get businessErrorCode(): string {
-    return 'S01';
+    return BusinessErrorCodes.S01;
   }
 }

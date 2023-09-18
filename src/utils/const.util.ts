@@ -20,3 +20,15 @@ export const Const = {
   ROLE_ADMIN: 'admin',
   ROLE_EMPLOYEE: 'employee'
 } as const;
+
+export const BusinessErrorCodes = {
+  S00: 'S00',
+  S01: 'S01',
+  S99: 'S99'
+};
+
+export const BusinessErrorCodeMessages = {
+  S00: 'クライアントからのリクエストは不正です',
+  S01: 'ユーザは削除されてました。管理者にご連絡ください。',
+  S99: 'その他のエラー'
+};
