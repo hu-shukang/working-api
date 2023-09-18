@@ -16,7 +16,8 @@ export const Const = {
   GOOGLE_CLIENT_ID_NAME: '/working-api/google-client-id',
   GOOGLE_CLIENT_SECRET_NAME: '/working-api/google-client-secret',
   // APIGateway
-  TOKEN_AUTHORIZER: 'tokenAuthorizer',
+  COMMON_AUTHORIZER: 'commonAuthorizer',
+  SIGNUP_STATUS_AUTHORIZER: 'signupStatusAuthorizer',
   // 権限
   ROLE_ADMIN: 'admin',
   ROLE_EMPLOYEE: 'employee',

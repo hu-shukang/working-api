@@ -1,4 +1,4 @@
-import { handlerPath } from '@utils/lambda.util';
+import { Const, handlerPath } from '@utils';
 
 export default {
   handler: `${handlerPath(__dirname)}/handler.main`,
@@ -7,7 +7,10 @@ export default {
       http: {
         method: 'get',
         path: '/traffic',
-        cors: true
+        cors: true,
+        authorizer: {
+          name: Const.SIGNUP_STATUS_AUTHORIZER
+        }
       }
     }
   ]

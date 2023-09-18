@@ -9,7 +9,7 @@ export default {
         path: '/user/token/refresh',
         cors: true,
         authorizer: {
-          name: Const.TOKEN_AUTHORIZER
+          name: Const.COMMON_AUTHORIZER
         }
       }
     }

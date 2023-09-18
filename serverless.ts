@@ -1,6 +1,14 @@
 import type { AWS } from '@serverless/typescript';
 import { WorkingTable } from '@resources';
-import { getToken, refreshToken, tokenAuthorizer, addTraffic, deleteTraffic, queryTraffic } from '@functions';
+import {
+  getToken,
+  refreshToken,
+  commonAuthorizer,
+  signupStatusAuthorizer,
+  addTraffic,
+  deleteTraffic,
+  queryTraffic
+} from '@functions';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
@@ -32,7 +40,15 @@ const serverlessConfiguration: AWS = {
       WorkingTable
     }
   },
-  functions: { getToken, refreshToken, tokenAuthorizer, addTraffic, deleteTraffic, queryTraffic },
+  functions: {
+    getToken,
+    refreshToken,
+    commonAuthorizer,
+    signupStatusAuthorizer,
+    addTraffic,
+    deleteTraffic,
+    queryTraffic
+  },
   package: { individually: true },
   custom: {
     esbuild: {
