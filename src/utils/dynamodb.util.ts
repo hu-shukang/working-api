@@ -7,7 +7,7 @@ import {
   DeleteCommand,
   DeleteCommandOutput
 } from '@aws-sdk/lib-dynamodb';
-import { DynamoDBQueryKeyError, DynamoDBQueryOptions, Key, PK, RequiredKey } from '@models';
+import { DynamoDBQueryKeyError, DynamoDBQueryOptions, Key } from '@models';
 
 export class DynamoDBUtil {
   protected docClient: DynamoDBDocumentClient;
