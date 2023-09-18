@@ -38,3 +38,15 @@ export type CreateUpdateAttributes = {
   /** 更新者 */
   updateUser?: string;
 };
+
+export type DynamoDBQueryOptions = {
+  indexName?: string;
+  filter?: {
+    expression: string;
+    expressionAttributeNames?: any;
+    expressionAttributeValues: any;
+  };
+  projectionExpression?: string;
+  beginsWithSK?: true;
+  exclusiveStartKey?: Record<string, any>;
+};

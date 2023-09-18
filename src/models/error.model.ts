@@ -22,3 +22,31 @@ export class EmployeeDeletedError extends HttpError {
     return BusinessErrorCodes.S01;
   }
 }
+
+export class AuthorityLimitError extends HttpError {
+  constructor() {
+    super(BusinessErrorCodeMessages.S02);
+  }
+
+  get statusCode(): number {
+    return 401;
+  }
+
+  get businessErrorCode(): string {
+    return BusinessErrorCodes.S02;
+  }
+}
+
+export class DynamoDBQueryKeyError extends HttpError {
+  constructor() {
+    super(BusinessErrorCodeMessages.S03);
+  }
+
+  get statusCode(): number {
+    return 401;
+  }
+
+  get businessErrorCode(): string {
+    return BusinessErrorCodes.S03;
+  }
+}

@@ -1,3 +1,5 @@
+import { Const } from '@utils';
+
 export const WorkingTable = {
   Type: 'AWS::DynamoDB::Table',
   Properties: {
@@ -13,6 +15,10 @@ export const WorkingTable = {
       {
         AttributeName: 'sub',
         AttributeType: 'S'
+      },
+      {
+        AttributeName: 'routeId',
+        AttributeType: 'S'
       }
     ],
     KeySchema: [
@@ -27,10 +33,22 @@ export const WorkingTable = {
     ],
     GlobalSecondaryIndexes: [
       {
-        IndexName: 'SUB_IDX',
+        IndexName: Const.SUB_IDX,
         KeySchema: [
           {
             AttributeName: 'sub',
+            KeyType: 'HASH'
+          }
+        ],
+        Projection: {
+          ProjectionType: 'ALL'
+        }
+      },
+      {
+        IndexName: Const.ROUTE_IDX,
+        KeySchema: [
+          {
+            AttributeName: 'routeId',
             KeyType: 'HASH'
           }
         ],
