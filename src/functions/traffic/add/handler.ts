@@ -12,7 +12,8 @@ const addTraffic: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async 
   const queryOptions: DynamoDBQueryOptions = { beginsWithSK: true };
   const entities = await dynamodbUtil.getRecords<TrafficEntity>(WORKING_TBL, key, queryOptions);
   const index = entities.length;
-  key = { pk: id, sk: `${TRAFFIC_ROUTE}${SP}${index}` };
+  const sk = `${TRAFFIC_ROUTE}${SP}${index}`;
+  key = { pk: id, sk: sk };
   const attributes = {
     ...form,
     type: TRAFFIC_ROUTE,
@@ -21,7 +22,7 @@ const addTraffic: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async 
     createUser: id
   };
   await dynamodbUtil.addRecord(WORKING_TBL, key, attributes);
-  return trafficEntityToViewModel(Object.assign({}, { pk: key.pkValue, sk: key.skValue }, attributes));
+  return trafficEntityToViewModel(Object.assign({}, { pk: id, sk: sk }, attributes));
 };
 
 export const main = middyfy(addTraffic, schema);
