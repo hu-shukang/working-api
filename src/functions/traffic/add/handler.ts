@@ -1,6 +1,6 @@
 import { Const, dateUtil, DynamoDBUtil, middyfy, stringUtil, ValidatedEventAPIGatewayProxyEvent } from '@utils';
 import { schema, bodySchema } from './schema';
-import { DynamoDBQueryOptions, Key, TrafficAddUpdateForm, TrafficEntity, trafficEntityToViewModel } from '@models';
+import { DynamoDBQueryOptions, TrafficAddUpdateForm, TrafficEntity, trafficEntityToViewModel } from '@models';
 
 const addTraffic: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async (event) => {
   const form: TrafficAddUpdateForm = event.body;
@@ -8,11 +8,11 @@ const addTraffic: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async 
   console.log(form);
   const dynamodbUtil = new DynamoDBUtil();
   const { WORKING_TBL, TRAFFIC_ROUTE, SP, PK, SK } = Const;
-  let key: Required<Key> = { pkName: PK, pkValue: id, skName: SK, skValue: TRAFFIC_ROUTE };
+  let key: any = { pkName: PK, pkValue: id, skName: SK, skValue: TRAFFIC_ROUTE };
   const queryOptions: DynamoDBQueryOptions = { beginsWithSK: true };
   const entities = await dynamodbUtil.getRecords<TrafficEntity>(WORKING_TBL, key, queryOptions);
   const index = entities.length;
-  key = { pkName: PK, pkValue: id, skName: SK, skValue: `${TRAFFIC_ROUTE}${SP}${index}` };
+  key = { pk: id, sk: `${TRAFFIC_ROUTE}${SP}${index}` };
   const attributes = {
     ...form,
     type: TRAFFIC_ROUTE,
