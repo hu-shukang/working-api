@@ -8,8 +8,8 @@ const addTraffic: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async 
   const { sub } = event.requestContext.authorizer;
   console.log(form);
   const dynamodbUtil = new DynamoDBUtil();
-  const { WORKING_TBL, INFO, SUCCESS, PK, FINISH } = Const;
-  const key: Key = { pkName: PK, pkValue: sub };
+  const { WORKING_TBL, INFO, SUCCESS, PK, SK, FINISH } = Const;
+  const key: Key = { pkName: PK, pkValue: sub, skName: SK, skValue: INFO };
   const employeeInfo = await dynamodbUtil.getRecord<EmployeeInfoEntity>(WORKING_TBL, key);
   if (!employeeInfo) {
     throw new EmployeeEmptyError();
