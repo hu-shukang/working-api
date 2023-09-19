@@ -78,8 +78,12 @@ export class DynamoDBUtil {
       [`:${key.pkName}`]: key.pkValue,
       ...queryOptions?.filter?.expressionAttributeValues
     };
-    if (queryOptions.beginsWithSK) {
-      keyConditionExpression.push(`#${key.skName} = :${key.skName}`);
+    if (key.skName !== undefined && key.skValue !== undefined) {
+      if (queryOptions.beginsWithSK) {
+        keyConditionExpression.push(`begins_with(#${key.skName}, :${key.skName})`);
+      } else {
+        keyConditionExpression.push(`#${key.skName} = :${key.skName}`);
+      }
       expressionAttributeNames[`#${key.skName}`] = key.skName;
       expressionAttributeValues[`:${key.skName}`] = key.skValue;
     }
