@@ -110,7 +110,7 @@ export class DynamoDBUtil {
         ...attributes,
         ...key
       },
-      ConditionExpression: Const.PK_EXISTS_SK_EXISTS
+      ConditionExpression: Const.PK_NO_EXISTS_SK_NO_EXISTS
     });
     return await this.docClient.send(command);
   }
@@ -118,7 +118,8 @@ export class DynamoDBUtil {
   public async deleteRecord(tableName: string, key: Record<string, any>): Promise<DeleteCommandOutput> {
     const command = new DeleteCommand({
       TableName: tableName,
-      Key: key
+      Key: key,
+      ConditionExpression: Const.PK_EXISTS_SK_EXISTS
     });
     return await this.docClient.send(command);
   }

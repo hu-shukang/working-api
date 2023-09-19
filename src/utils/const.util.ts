@@ -14,6 +14,7 @@ export const Const = {
   TRAFFIC_ROUTE: 'TRAFFIC_ROUTE',
   WORKING_TBL: process.env.WORKING_TBL,
   PK_EXISTS_SK_EXISTS: 'attribute_exists(pk) and attribute_exists(sk)',
+  PK_NO_EXISTS_SK_NO_EXISTS: 'attribute_not_exists(pk) and attribute_not_exists(sk)',
   // Google
   GOOGLE_CLIENT_ID_NAME: '/working-api/google-client-id',
   GOOGLE_CLIENT_SECRET_NAME: '/working-api/google-client-secret',
