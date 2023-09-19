@@ -7,6 +7,7 @@ export const Const = {
   ROUTE_IDX: 'ROUTE_IDX',
   INFO: 'INFO',
   INIT: 'INIT',
+  ROUTE_ID: 'routeId',
   EMPLOYEE_INFO: 'EMPLOYEE_INFO',
   FINISH: 'FINISH',
   PENDING: 'PENDING',

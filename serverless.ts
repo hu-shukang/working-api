@@ -8,6 +8,7 @@ import {
   addTraffic,
   deleteTraffic,
   queryTraffic,
+  updateTraffic,
   signup
 } from '@functions';
 import { readFileSync } from 'fs';
@@ -49,7 +50,8 @@ const serverlessConfiguration: AWS = {
     signupStatusAuthorizer,
     addTraffic,
     deleteTraffic,
-    queryTraffic
+    queryTraffic,
+    updateTraffic
   },
   package: { individually: true },
   custom: {

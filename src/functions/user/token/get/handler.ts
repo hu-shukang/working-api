@@ -5,7 +5,6 @@ import {
   DynamoDBUtil,
   Const,
   OAuth2Util,
-  stringUtil,
   dateUtil
 } from '@utils';
 import { schema, bodySchema } from './schema';

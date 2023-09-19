@@ -1,9 +1,9 @@
 import { Const, dateUtil, DynamoDBUtil, middyfy, stringUtil, ValidatedEventAPIGatewayProxyEvent } from '@utils';
 import { schema, bodySchema } from './schema';
-import { DynamoDBQueryOptions, Key, TrafficAddForm, TrafficEntity, trafficEntityToViewModel } from '@models';
+import { DynamoDBQueryOptions, Key, TrafficAddUpdateForm, TrafficEntity, trafficEntityToViewModel } from '@models';
 
 const addTraffic: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async (event) => {
-  const form: TrafficAddForm = event.body;
+  const form: TrafficAddUpdateForm = event.body;
   const { id } = event.requestContext.authorizer;
   console.log(form);
   const dynamodbUtil = new DynamoDBUtil();

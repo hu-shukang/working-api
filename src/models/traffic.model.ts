@@ -2,9 +2,9 @@ import { Const } from '@utils/const.util';
 import { CommonAttributes, CreateUpdateAttributes } from './common.model';
 
 /**
- * 経由ルート追加Form
+ * 経由ルート追加更新Form
  */
-export type TrafficAddForm = {
+export type TrafficAddUpdateForm = {
   /** 出発駅 */
   startStation: string;
   /** 終点駅 */
@@ -19,11 +19,11 @@ export type TrafficAddForm = {
   comment?: string;
 };
 
-export type TrafficEntity = CommonAttributes & TrafficAddForm & CreateUpdateAttributes;
+export type TrafficEntity = CommonAttributes & TrafficAddUpdateForm & CreateUpdateAttributes;
 
 export type TrafficViewModel = {
   index: number;
-} & TrafficAddForm;
+} & TrafficAddUpdateForm;
 
 export const trafficEntityToViewModel = (entity: TrafficEntity): TrafficViewModel => {
   return {
