@@ -7,9 +7,13 @@ import {
   DeleteCommand,
   DeleteCommandOutput,
   UpdateCommand,
-  UpdateCommandOutput
+  UpdateCommandOutput,
+  TransactWriteCommand,
+  TransactWriteCommandInput,
+  TransactWriteCommandOutput
 } from '@aws-sdk/lib-dynamodb';
 import { DynamoDBQueryKeyError, DynamoDBQueryOptions, Key } from '@models';
+import { Const } from './const.util';
 
 export class DynamoDBUtil {
   protected docClient: DynamoDBDocumentClient;
@@ -106,7 +110,7 @@ export class DynamoDBUtil {
         ...attributes,
         ...key
       },
-      ConditionExpression: 'attribute_not_exists(pk) and attribute_not_exists(sk)'
+      ConditionExpression: Const.PK_EXISTS_SK_EXISTS
     });
     return await this.docClient.send(command);
   }
@@ -140,6 +144,11 @@ export class DynamoDBUtil {
       ExpressionAttributeValues: expressionAttributeValues,
       ConditionExpression: 'attribute_exists(pk) and attribute_exists(sk)'
     });
+    return await this.docClient.send(command);
+  }
+
+  public async transactWrite(input: TransactWriteCommandInput): Promise<TransactWriteCommandOutput> {
+    const command = new TransactWriteCommand(input);
     return await this.docClient.send(command);
   }
 

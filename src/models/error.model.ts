@@ -9,6 +9,20 @@ export abstract class HttpError extends Error {
   abstract get businessErrorCode(): string;
 }
 
+export class EmployeeEmptyError extends HttpError {
+  constructor() {
+    super(BusinessErrorCodeMessages.S01);
+  }
+
+  get statusCode(): number {
+    return 400;
+  }
+
+  get businessErrorCode(): string {
+    return BusinessErrorCodes.S01;
+  }
+}
+
 export class EmployeeDeletedError extends HttpError {
   constructor() {
     super(BusinessErrorCodeMessages.S01);

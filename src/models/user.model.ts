@@ -23,7 +23,7 @@ export type EmployeeInfoEntity = {
   /** OAuth2 sub */
   sub: string;
   /** 入社日 */
-  hireDate: number;
+  hireDate: string;
   /** 権限 */
   role: string;
   /** 部門ID */
@@ -49,7 +49,7 @@ export type EmployeeInfoViewModel = {
   /** 社員ID */
   id: string;
   /** 入社日 */
-  hireDate: number;
+  hireDate: string;
   /** 権限 */
   role: string;
   /** 苗字 */

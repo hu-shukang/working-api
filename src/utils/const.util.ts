@@ -13,6 +13,7 @@ export const Const = {
   PENDING: 'PENDING',
   TRAFFIC_ROUTE: 'TRAFFIC_ROUTE',
   WORKING_TBL: process.env.WORKING_TBL,
+  PK_EXISTS_SK_EXISTS: 'attribute_exists(pk) and attribute_exists(sk)',
   // Google
   GOOGLE_CLIENT_ID_NAME: '/working-api/google-client-id',
   GOOGLE_CLIENT_SECRET_NAME: '/working-api/google-client-secret',
@@ -31,6 +32,7 @@ export const BusinessErrorCodes = {
   S01: 'S01',
   S02: 'S02',
   S03: 'S03',
+  S04: 'S04',
   S99: 'S99'
 };
 
@@ -39,5 +41,6 @@ export const BusinessErrorCodeMessages = {
   S01: 'ユーザは削除されてました。管理者にご連絡ください。',
   S02: '該当権限はありません。',
   S03: '検索キーは不正です。',
+  S04: 'ユーザは存在しないです。',
   S99: 'その他のエラー。'
 };
