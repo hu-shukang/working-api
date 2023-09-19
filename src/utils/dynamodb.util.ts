@@ -90,7 +90,7 @@ export class DynamoDBUtil {
       FilterExpression: queryOptions?.filter?.expression,
       ProjectionExpression: queryOptions?.projectionExpression,
       ExpressionAttributeNames: expressionAttributeNames,
-      ExpressionAttributeValues: expressionAttributeNames,
+      ExpressionAttributeValues: expressionAttributeValues,
       ExclusiveStartKey: queryOptions?.exclusiveStartKey
     });
     const result = await this.docClient.send(command);
