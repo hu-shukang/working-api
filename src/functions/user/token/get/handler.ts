@@ -20,9 +20,8 @@ import { TokenPayload } from 'google-auth-library';
  * @returns 仮の社員ID
  */
 const addEmployeeInfo = async (dynamodbUtil: DynamoDBUtil, payload: TokenPayload): Promise<EmployeeInfoEntity> => {
-  const tempEmployeeId = stringUtil.uuid();
   const key = {
-    pk: tempEmployeeId,
+    pk: payload.sub,
     sk: Const.INFO
   };
   const attributes = {

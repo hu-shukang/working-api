@@ -5,6 +5,17 @@ export type LoginForm = {
   code: string;
 };
 
+export type SignUpForm = {
+  /** 社員ID */
+  id: string;
+  /** 入社日 */
+  hireDate: string;
+  /** 苗字 */
+  familyName: string;
+  /** 名前 */
+  givenName: string;
+};
+
 /**
  * DynamoDB type: EMPLOYEE_INFO
  */

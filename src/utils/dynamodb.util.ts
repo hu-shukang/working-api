@@ -5,9 +5,11 @@ import {
   QueryCommand,
   PutCommand,
   DeleteCommand,
-  DeleteCommandOutput
+  DeleteCommandOutput,
+  UpdateCommand,
+  UpdateCommandOutput
 } from '@aws-sdk/lib-dynamodb';
-import { DynamoDBQueryKeyError, DynamoDBQueryOptions, Key } from '@models';
+import { DynamoDBQueryKeyError, DynamoDBQueryOptions, Key, RequiredKey } from '@models';
 
 export class DynamoDBUtil {
   protected docClient: DynamoDBDocumentClient;
@@ -113,6 +115,30 @@ export class DynamoDBUtil {
     const command = new DeleteCommand({
       TableName: tableName,
       Key: key
+    });
+    return await this.docClient.send(command);
+  }
+
+  public async updateRecord(
+    tableName: string,
+    key: Record<string, any>,
+    attributes: Record<string, any>
+  ): Promise<UpdateCommandOutput> {
+    const updateExpression: string[] = [];
+    const expressionAttributeNames: Record<string, any> = {};
+    const expressionAttributeValues: Record<string, any> = {};
+    for (const [k, v] of Object.entries(attributes)) {
+      updateExpression.push(`#${k} = :${k}`);
+      expressionAttributeNames[`#${k}`] = k;
+      expressionAttributeValues[`:${k}`] = v;
+    }
+    const command = new UpdateCommand({
+      TableName: tableName,
+      Key: key,
+      UpdateExpression: 'set ' + updateExpression.join(', '),
+      ExpressionAttributeNames: expressionAttributeNames,
+      ExpressionAttributeValues: expressionAttributeValues,
+      ConditionExpression: 'attribute_exists(pk) and attribute_exists(sk)'
     });
     return await this.docClient.send(command);
   }

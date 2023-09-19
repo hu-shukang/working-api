@@ -13,11 +13,17 @@ export class OAuth2Util {
   }
 
   public async getPayload(idToken: string): Promise<TokenPayload> {
+    if (idToken.startsWith('Bearer')) {
+      idToken = idToken.replace('Bearer ', '');
+    }
     const ticket = await this.oauth2Client.verifyIdToken({ idToken: idToken });
     return ticket.getPayload();
   }
 
   public async refreshTokens(idToken: string, refreshToken: string) {
+    if (idToken.startsWith('Bearer')) {
+      idToken = idToken.replace('Bearer ', '');
+    }
     this.oauth2Client.setCredentials({
       id_token: idToken,
       refresh_token: refreshToken

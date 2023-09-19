@@ -7,7 +7,8 @@ import {
   signupStatusAuthorizer,
   addTraffic,
   deleteTraffic,
-  queryTraffic
+  queryTraffic,
+  signup
 } from '@functions';
 import { readFileSync } from 'fs';
 import { join } from 'path';
@@ -42,6 +43,7 @@ const serverlessConfiguration: AWS = {
   },
   functions: {
     getToken,
+    signup,
     refreshToken,
     commonAuthorizer,
     signupStatusAuthorizer,
