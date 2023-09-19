@@ -9,7 +9,7 @@ import {
   UpdateCommand,
   UpdateCommandOutput
 } from '@aws-sdk/lib-dynamodb';
-import { DynamoDBQueryKeyError, DynamoDBQueryOptions, Key, RequiredKey } from '@models';
+import { DynamoDBQueryKeyError, DynamoDBQueryOptions, Key } from '@models';
 
 export class DynamoDBUtil {
   protected docClient: DynamoDBDocumentClient;
