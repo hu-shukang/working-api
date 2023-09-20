@@ -55,6 +55,7 @@ export const main = async (event: APIGatewayTokenAuthorizerEvent, _context: Cont
     const policy = generatePolicy(event, 'Deny', {});
     callback(null, policy);
   } catch (err) {
+    console.log(err);
     const policy = generatePolicy(event, 'Deny', {});
     callback(null, policy);
   }
