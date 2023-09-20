@@ -11,7 +11,6 @@ export const queryStringParametersSchema = {
 
 export const schema = {
   type: 'object',
-  required: ['queryStringParameters'],
   properties: {
     queryStringParameters: queryStringParametersSchema
   }
