@@ -3,7 +3,7 @@ import { schema } from './schema';
 import { DynamoDBQueryOptions, Key, TrafficEntity, trafficEntityToViewModel } from '@models';
 
 const queryTraffic: ValidatedEventAPIGatewayProxyEvent<any> = async (event) => {
-  const { routeId } = event.queryStringParameters;
+  const routeId = event.queryStringParameters?.routeId;
   const { id } = event.requestContext.authorizer;
   const dynamodbUtil = new DynamoDBUtil();
   const { WORKING_TBL, TRAFFIC_ROUTE, PK, SK } = Const;

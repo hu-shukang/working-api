@@ -19,15 +19,21 @@ export type TrafficAddUpdateForm = {
   comment?: string;
 };
 
-export type TrafficEntity = CommonAttributes & TrafficAddUpdateForm & CreateUpdateAttributes;
+export type TrafficEntity = {
+  routeId: string;
+} & CommonAttributes &
+  TrafficAddUpdateForm &
+  CreateUpdateAttributes;
 
 export type TrafficViewModel = {
   index: number;
+  routeId: string;
 } & TrafficAddUpdateForm;
 
 export const trafficEntityToViewModel = (entity: TrafficEntity): TrafficViewModel => {
   return {
     index: Number.parseInt(entity.sk.split(Const.SP)[1]),
+    routeId: entity.routeId,
     startStation: entity.startStation,
     endStation: entity.endStation,
     tractStation: entity.tractStation,

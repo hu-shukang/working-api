@@ -1,5 +1,5 @@
 export const queryStringParametersSchema = {
-  type: 'object',
+  type: ['object', 'null'],
   properties: {
     routeId: {
       type: 'string',
