@@ -8,9 +8,6 @@ const generatePolicy = (
   payload: any,
   employeeInfo?: EmployeeInfoEntity
 ): CustomAuthorizerResult => {
-  console.log(event);
-  console.log(effect);
-  console.log(payload);
   return {
     principalId: '*',
     policyDocument: {
@@ -46,11 +43,13 @@ export const main = async (event: APIGatewayTokenAuthorizerEvent, _context: Cont
       });
       let policy: any = {};
       if (employeeInfo === undefined || employeeInfo.deleted || employeeInfo.signupStatus === Const.PENDING) {
+        console.log('');
         policy = generatePolicy(event, 'Deny', {});
       } else {
         policy = generatePolicy(event, 'Allow', payload, employeeInfo);
       }
       callback(null, policy);
+      return;
     }
     const policy = generatePolicy(event, 'Deny', {});
     callback(null, policy);
