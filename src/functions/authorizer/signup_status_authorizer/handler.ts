@@ -8,6 +8,7 @@ const generatePolicy = (
   payload: any,
   employeeInfo?: EmployeeInfoEntity
 ): CustomAuthorizerResult => {
+  console.log(effect);
   return {
     principalId: '*',
     policyDocument: {
