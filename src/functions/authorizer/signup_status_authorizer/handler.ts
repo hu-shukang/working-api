@@ -43,16 +43,15 @@ export const main = async (event: APIGatewayTokenAuthorizerEvent, _context: Cont
       });
       let policy: any = {};
       if (employeeInfo === undefined || employeeInfo.deleted || employeeInfo.signupStatus === Const.PENDING) {
-        console.log('');
         policy = generatePolicy(event, 'Deny', {});
       } else {
         policy = generatePolicy(event, 'Allow', payload, employeeInfo);
       }
       callback(null, policy);
-      return;
+    } else {
+      const policy = generatePolicy(event, 'Deny', {});
+      callback(null, policy);
     }
-    const policy = generatePolicy(event, 'Deny', {});
-    callback(null, policy);
   } catch (err) {
     console.log(err);
     const policy = generatePolicy(event, 'Deny', {});
