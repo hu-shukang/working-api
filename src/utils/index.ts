@@ -5,3 +5,4 @@ export * from './lambda.util';
 export * from './oauth2.util';
 export * from './parameter.util';
 export * from './string.util';
+export * from './jwt.util';

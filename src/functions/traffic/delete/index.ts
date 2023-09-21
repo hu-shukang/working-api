@@ -9,7 +9,7 @@ export default {
         path: '/traffic/{routeId}',
         cors: true,
         authorizer: {
-          name: Const.SIGNUP_STATUS_AUTHORIZER
+          name: Const.AUTHORIZER
         }
       }
     }

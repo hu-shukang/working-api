@@ -17,6 +17,7 @@
     "@middy/validator": "^4.6.1",
     "dayjs": "^1.11.9",
     "google-auth-library": "^9.0.0",
+    "jsonwebtoken": "^9.0.2",
     "uuid": "^9.0.0"
   }
 }

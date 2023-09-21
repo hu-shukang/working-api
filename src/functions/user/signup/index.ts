@@ -9,7 +9,7 @@ export default {
         path: '/user/signup',
         cors: true,
         authorizer: {
-          name: Const.COMMON_AUTHORIZER
+          name: Const.AUTHORIZER
         }
       }
     }

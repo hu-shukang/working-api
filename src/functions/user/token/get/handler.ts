@@ -47,9 +47,9 @@ const getToken: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async (e
   const { provider, code } = event.body;
   console.log(provider, code);
   const parameterUtil = new ParameterUtil();
-  const { clientId, clientSecret } = await parameterUtil.getGoogleClientParameter();
+  const { googleClientId, googleClientSecret, jwtSecret } = await parameterUtil.getOAuth2Parameters();
 
-  const oauth2Util = new OAuth2Util(clientId, clientSecret);
+  const oauth2Util = new OAuth2Util(googleClientId, googleClientSecret);
   const tokens = await oauth2Util.getToken(code);
   const payload = await oauth2Util.getPayload(tokens.idToken);
   console.log(payload);
@@ -68,9 +68,18 @@ const getToken: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async (e
     throw new EmployeeDeletedError();
   }
   const employeeInfoViewModel = employeeInfoEntityToViewModel(record);
-
+  const newPayload = {
+    id: employeeInfoViewModel.id,
+    signupStatus: employeeInfoViewModel.signupStatus,
+    role: employeeInfoViewModel.role
+  };
+  const accessToken = oauth2Util.signAccessToken(newPayload, jwtSecret);
+  const refreshToken = oauth2Util.getRefreshToken(jwtSecret);
   return {
-    tokens: tokens,
+    tokens: {
+      accessToken,
+      refreshToken
+    },
     info: employeeInfoViewModel
   };
 };

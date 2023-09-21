@@ -16,6 +16,10 @@ class DateUtil {
   public unix(origin?: DayjsDate) {
     return dayjs(origin).unix();
   }
+
+  public add(origin: DayjsDate, value: number, unit: dayjs.ManipulateType) {
+    return dayjs(origin).add(value, unit);
+  }
 }
 
 export const dateUtil = new DateUtil();
