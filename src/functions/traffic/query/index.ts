@@ -8,7 +8,7 @@ export default {
         method: 'get',
         path: '/traffic',
         cors: true,
-        authorizer: Const.AUTHORIZER
+        authorizer: Const.SIGNUP_STATUS_AUTHORIZER
       }
     }
   ]

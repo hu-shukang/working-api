@@ -20,8 +20,14 @@ export const Const = {
   GOOGLE_CLIENT_SECRET_NAME: '/working-api/google-client-secret',
   JWT_SECRET_NAME: '/working-api/jwt-secret',
   // APIGateway
-  AUTHORIZER: {
-    name: 'tokenAuthorizer',
+  COMMON_AUTHORIZER: {
+    name: 'commonAuthorizer',
+    resultTtlInSeconds: 300,
+    identitySource: 'method.request.header.Authorization, context.identity.sourceIp, context.httpMethod',
+    type: 'request'
+  },
+  SIGNUP_STATUS_AUTHORIZER: {
+    name: 'signupStatusAuthorizer',
     resultTtlInSeconds: 300,
     identitySource: 'method.request.header.Authorization, context.identity.sourceIp, context.httpMethod',
     type: 'request'
