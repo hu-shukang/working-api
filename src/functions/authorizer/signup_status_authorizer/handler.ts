@@ -31,7 +31,7 @@ export const main = async (event: APIGatewayRequestAuthorizerEvent, _context: Co
     const parameterUtil = new ParameterUtil();
     const secret = await parameterUtil.getJwtSecret();
     const jwtUtil = new JwtUtil();
-    const payload = jwtUtil.verifyAccessToken(token, secret);
+    const payload = jwtUtil.verifyToken(token, secret);
     console.log('payload', payload);
     let policy: any = undefined;
     if (payload && payload.signupStatus === Const.FINISH) {

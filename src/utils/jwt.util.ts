@@ -6,7 +6,7 @@ export class JwtUtil {
     return jwt.sign(payload, secret, { expiresIn: '3h' });
   }
 
-  public verifyAccessToken(token: string, secret: string): any {
+  public verifyToken(token: string, secret: string): any {
     token = token.replace('Bearer ', '');
     return jwt.verify(token, secret);
   }
