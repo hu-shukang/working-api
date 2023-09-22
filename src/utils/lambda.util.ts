@@ -63,11 +63,10 @@ const customErrorHandler = (): middy.MiddlewareObj => {
 };
 
 export const middyfy = (handler: any, schema?: object) => {
-  let func = middy(handler).use(middyJsonBodyParser()).use(responseParser());
+  let func = middy(handler).use(customErrorHandler()).use(middyJsonBodyParser()).use(responseParser());
   if (schema) {
     const ajv = transpileSchema(schema, { $data: true, allErrors: true, coerceTypes: false });
     func = func.use(validator({ eventSchema: ajv }));
   }
-  func = func.use(customErrorHandler());
   return func;
 };

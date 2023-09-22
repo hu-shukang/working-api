@@ -5,7 +5,8 @@ import {
   DynamoDBUtil,
   Const,
   OAuth2Util,
-  dateUtil
+  dateUtil,
+  JwtUtil
 } from '@utils';
 import { schema, bodySchema } from './schema';
 import { Key, EmployeeInfoEntity, employeeInfoEntityToViewModel, EmployeeDeletedError } from '@models';
@@ -73,8 +74,9 @@ const getToken: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async (e
     signupStatus: employeeInfoViewModel.signupStatus,
     role: employeeInfoViewModel.role
   };
-  const accessToken = oauth2Util.signAccessToken(newPayload, jwtSecret);
-  const refreshToken = oauth2Util.getRefreshToken(jwtSecret);
+  const jwtUtil = new JwtUtil();
+  const accessToken = jwtUtil.signAccessToken(newPayload, jwtSecret);
+  const refreshToken = jwtUtil.getRefreshToken(jwtSecret);
   return {
     tokens: {
       accessToken,
