@@ -1,17 +1,15 @@
 import { Const, dateUtil, DynamoDBUtil, middyfy, ValidatedEventAPIGatewayProxyEvent } from '@utils';
 import { schema, bodySchema } from './schema';
-import { TrafficAddUpdateForm, TrafficEntity } from '@models';
+import { TrafficAddUpdateForm } from '@models';
 
 const updateTraffic: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async (event) => {
   const form: TrafficAddUpdateForm = event.body;
   const { id } = event.requestContext.authorizer;
   const { routeId } = event.pathParameters;
   console.log(form);
+  const { WORKING_TBL, SUCCESS, TRAFFIC_ROUTE, SP } = Const;
   const dynamodbUtil = new DynamoDBUtil();
-  const { WORKING_TBL, SUCCESS, ROUTE_IDX, ROUTE_ID } = Const;
-  let key: any = { pkName: ROUTE_ID, pkValue: routeId };
-  const entity = await dynamodbUtil.getRecord<TrafficEntity>(WORKING_TBL, ROUTE_IDX, key);
-  key = { pk: entity.pk, sk: entity.sk };
+  const key = { pk: id, sk: `${TRAFFIC_ROUTE}${SP}${routeId}` };
   const attributes = {
     ...form,
     updateDate: dateUtil.unix(),

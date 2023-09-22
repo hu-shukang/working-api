@@ -28,6 +28,11 @@ export type CommonAttributes = {
   type: string;
 };
 
+export type Sort = {
+  /** ソート用 */
+  sort: string;
+};
+
 export type CreateUpdateAttributes = {
   /** 作成日時 */
   createDate?: number;
@@ -49,4 +54,10 @@ export type DynamoDBQueryOptions = {
   projectionExpression?: string;
   beginsWithSK?: true;
   exclusiveStartKey?: Record<string, any>;
+};
+
+export type DynamoDBDeleteOptions = {
+  conditionExpression?: string;
+  expressionAttributeNames?: any;
+  expressionAttributeValues?: any;
 };

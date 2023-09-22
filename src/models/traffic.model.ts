@@ -1,5 +1,5 @@
 import { Const } from '@utils/const.util';
-import { CommonAttributes, CreateUpdateAttributes } from './common.model';
+import { CommonAttributes, CreateUpdateAttributes, Sort } from './common.model';
 
 /**
  * 経由ルート追加更新Form
@@ -19,21 +19,19 @@ export type TrafficAddUpdateForm = {
   comment?: string;
 };
 
-export type TrafficEntity = {
-  routeId: string;
-} & CommonAttributes &
-  TrafficAddUpdateForm &
-  CreateUpdateAttributes;
+export type TrafficSortForm = Array<{ routeId: string; index: number }>;
+
+export type TrafficEntity = CommonAttributes & TrafficAddUpdateForm & CreateUpdateAttributes & Sort;
 
 export type TrafficViewModel = {
-  index: number;
   routeId: string;
-} & TrafficAddUpdateForm;
+} & TrafficAddUpdateForm &
+  Sort;
 
 export const trafficEntityToViewModel = (entity: TrafficEntity): TrafficViewModel => {
   return {
-    index: Number.parseInt(entity.sk.split(Const.SP)[1]),
-    routeId: entity.routeId,
+    routeId: entity.sk.split(Const.SP)[1],
+    sort: entity.sort,
     startStation: entity.startStation,
     endStation: entity.endStation,
     tractStation: entity.tractStation,

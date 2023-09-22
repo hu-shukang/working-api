@@ -12,7 +12,7 @@ import {
   TransactWriteCommandInput,
   TransactWriteCommandOutput
 } from '@aws-sdk/lib-dynamodb';
-import { DynamoDBQueryKeyError, DynamoDBQueryOptions, Key } from '@models';
+import { DynamoDBDeleteOptions, DynamoDBQueryKeyError, DynamoDBQueryOptions, Key } from '@models';
 import { Const } from './const.util';
 
 export class DynamoDBUtil {
@@ -119,11 +119,21 @@ export class DynamoDBUtil {
     return await this.docClient.send(command);
   }
 
-  public async deleteRecord(tableName: string, key: Record<string, any>): Promise<DeleteCommandOutput> {
+  public async deleteRecord(
+    tableName: string,
+    key: Record<string, any>,
+    options?: DynamoDBDeleteOptions
+  ): Promise<DeleteCommandOutput> {
+    let conditionExpression: string = Const.PK_EXISTS_SK_EXISTS;
+    if (options?.conditionExpression) {
+      conditionExpression = conditionExpression + ' and ' + options.conditionExpression;
+    }
     const command = new DeleteCommand({
       TableName: tableName,
       Key: key,
-      ConditionExpression: Const.PK_EXISTS_SK_EXISTS
+      ConditionExpression: conditionExpression,
+      ExpressionAttributeNames: options?.expressionAttributeNames,
+      ExpressionAttributeValues: options?.expressionAttributeValues
     });
     return await this.docClient.send(command);
   }

@@ -17,7 +17,7 @@ export const WorkingTable = {
         AttributeType: 'S'
       },
       {
-        AttributeName: 'routeId',
+        AttributeName: 'sort',
         AttributeType: 'S'
       }
     ],
@@ -45,11 +45,15 @@ export const WorkingTable = {
         }
       },
       {
-        IndexName: Const.ROUTE_IDX,
+        IndexName: Const.SORT_IDX,
         KeySchema: [
           {
-            AttributeName: 'routeId',
+            AttributeName: 'pk',
             KeyType: 'HASH'
+          },
+          {
+            AttributeName: 'sort',
+            KeyType: 'RANGE'
           }
         ],
         Projection: {

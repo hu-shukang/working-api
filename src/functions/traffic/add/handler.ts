@@ -12,12 +12,13 @@ const addTraffic: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = async 
   const queryOptions: DynamoDBQueryOptions = { beginsWithSK: true };
   const entities = await dynamodbUtil.getRecords<TrafficEntity>(WORKING_TBL, key, queryOptions);
   const index = entities.length;
-  const sk = `${TRAFFIC_ROUTE}${SP}${index}`;
+  const routeId = stringUtil.uuid();
+  const sk = `${TRAFFIC_ROUTE}${SP}${routeId}`;
   key = { pk: id, sk: sk };
   const attributes = {
     ...form,
     type: TRAFFIC_ROUTE,
-    routeId: stringUtil.uuid(),
+    sort: `${TRAFFIC_ROUTE}${SP}${index}`,
     createDate: dateUtil.unix(),
     createUser: id
   };
