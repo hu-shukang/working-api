@@ -1,13 +1,13 @@
-import { JwtUtil, OAuth2Util, ParameterUtil } from '@utils';
-import { APIGatewayTokenAuthorizerEvent, CustomAuthorizerResult, Context, Callback } from 'aws-lambda';
+import { JwtUtil, ParameterUtil } from '@utils';
+import { CustomAuthorizerResult, Context, Callback, APIGatewayRequestAuthorizerEvent } from 'aws-lambda';
 
 const generatePolicy = (
-  event: APIGatewayTokenAuthorizerEvent,
+  event: APIGatewayRequestAuthorizerEvent,
   effect: string,
   payload: any
 ): CustomAuthorizerResult => {
   return {
-    principalId: '*',
+    principalId: event.headers.Authorization,
     policyDocument: {
       Version: '2012-10-17',
       Statement: [
@@ -24,14 +24,15 @@ const generatePolicy = (
   };
 };
 
-export const main = async (event: APIGatewayTokenAuthorizerEvent, _context: Context, callback: Callback) => {
+export const main = async (event: APIGatewayRequestAuthorizerEvent, _context: Context, callback: Callback) => {
   try {
-    const token = event.authorizationToken;
+    const token = event.headers.Authorization;
+    console.log('token', token);
     const parameterUtil = new ParameterUtil();
     const secret = await parameterUtil.getJwtSecret();
     const jwtUtil = new JwtUtil();
     const payload = jwtUtil.verifyAccessToken(token, secret);
-    console.log(payload);
+    console.log('payload', payload);
     let policy: any = undefined;
     if (payload) {
       policy = generatePolicy(event, 'Allow', payload);

@@ -8,9 +8,7 @@ export default {
         method: 'post',
         path: '/traffic',
         cors: true,
-        authorizer: {
-          name: Const.AUTHORIZER
-        }
+        authorizer: Const.AUTHORIZER
       }
     }
   ]

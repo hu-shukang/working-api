@@ -8,9 +8,7 @@ export default {
         method: 'post',
         path: '/user/token/refresh',
         cors: true,
-        authorizer: {
-          name: Const.AUTHORIZER
-        }
+        authorizer: Const.AUTHORIZER
       }
     }
   ]

@@ -20,7 +20,12 @@ export const Const = {
   GOOGLE_CLIENT_SECRET_NAME: '/working-api/google-client-secret',
   JWT_SECRET_NAME: '/working-api/jwt-secret',
   // APIGateway
-  AUTHORIZER: 'tokenAuthorizer',
+  AUTHORIZER: {
+    name: 'tokenAuthorizer',
+    resultTtlInSeconds: 300,
+    identitySource: 'method.request.header.Authorization, context.identity.sourceIp, context.httpMethod',
+    type: 'request'
+  },
   // 権限
   ROLE_ADMIN: 'admin',
   ROLE_EMPLOYEE: 'employee',

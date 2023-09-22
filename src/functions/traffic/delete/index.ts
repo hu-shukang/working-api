@@ -8,9 +8,7 @@ export default {
         method: 'delete',
         path: '/traffic/{routeId}',
         cors: true,
-        authorizer: {
-          name: Const.AUTHORIZER
-        }
+        authorizer: Const.AUTHORIZER
       }
     }
   ]

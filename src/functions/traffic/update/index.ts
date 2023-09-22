@@ -8,9 +8,7 @@ export default {
         method: 'put',
         path: '/traffic/{routeId}',
         cors: true,
-        authorizer: {
-          name: Const.AUTHORIZER
-        }
+        authorizer: Const.AUTHORIZER
       }
     }
   ]
