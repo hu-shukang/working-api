@@ -24,6 +24,8 @@ export const Const = {
   // 権限
   ROLE_ADMIN: 'admin',
   ROLE_EMPLOYEE: 'employee',
+  // 日付
+  FORMAT_YYYY_MM_DD_HH_mm_ss: 'YYYY-MM-DD HH:mm:ss',
   // other
   SUCCESS: 'success'
 } as const;
