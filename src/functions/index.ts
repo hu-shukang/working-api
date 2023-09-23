@@ -11,3 +11,5 @@ export { default as reorderTraffic } from './traffic/reorder';
 export { default as addAttendance } from './attendance/add';
 export { default as deleteAttendance } from './attendance/delete';
 export { default as queryAttendance } from './attendance/query';
+export { default as addAttendanceTraffic } from './attendance/traffic/add';
+export { default as deleteAttendanceTraffic } from './attendance/traffic/delete';
