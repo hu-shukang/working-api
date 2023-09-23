@@ -107,14 +107,19 @@ export class DynamoDBUtil {
     return list;
   }
 
-  public async addRecord(tableName: string, key: Record<string, any>, attributes: Record<string, any>) {
+  public async addRecord(
+    tableName: string,
+    key: Record<string, any>,
+    attributes: Record<string, any>,
+    withKeyCheck = true
+  ) {
     const command = new PutCommand({
       TableName: tableName,
       Item: {
         ...attributes,
         ...key
       },
-      ConditionExpression: Const.PK_NO_EXISTS_SK_NO_EXISTS
+      ConditionExpression: withKeyCheck ? Const.PK_NO_EXISTS_SK_NO_EXISTS : undefined
     });
     return await this.docClient.send(command);
   }

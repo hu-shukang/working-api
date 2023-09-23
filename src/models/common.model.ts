@@ -28,6 +28,8 @@ export type CommonAttributes = {
   type: string;
 };
 
+export type DBRecord = CommonAttributes & Record<string, any>;
+
 export type Sort = {
   /** ソート用 */
   sort: string;

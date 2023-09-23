@@ -13,6 +13,9 @@ export const Const = {
   FINISH: 'FINISH',
   PENDING: 'PENDING',
   TRAFFIC_ROUTE: 'TRAFFIC_ROUTE',
+  ATTENDANCE: 'ATTENDANCE',
+  ATTENDANCE_INFO: 'ATTENDANCE_INFO',
+  ATTENDANCE_TRAFFIC: 'ATTENDANCE_TRAFFIC',
   WORKING_TBL: process.env.WORKING_TBL,
   PK_EXISTS_SK_EXISTS: 'attribute_exists(pk) and attribute_exists(sk)',
   PK_NO_EXISTS_SK_NO_EXISTS: 'attribute_not_exists(pk) and attribute_not_exists(sk)',
@@ -38,6 +41,7 @@ export const Const = {
   ROLE_EMPLOYEE: 'employee',
   // 日付
   FORMAT_YYYY_MM_DD_HH_mm_ss: 'YYYY-MM-DD HH:mm:ss',
+  FORMAT_YYYY_MM_DD: 'YYYY-MM-DD',
   // other
   SUCCESS: 'success'
 } as const;
@@ -48,6 +52,7 @@ export const BusinessErrorCodes = {
   S02: 'S02',
   S03: 'S03',
   S04: 'S04',
+  S05: 'S05',
   S99: 'S99'
 };
 
@@ -57,5 +62,6 @@ export const BusinessErrorCodeMessages = {
   S02: '該当権限はありません。',
   S03: '検索キーは不正です。',
   S04: 'ユーザは存在しないです。',
+  S05: '削除対象は存在しないです。',
   S99: 'その他のエラー。'
 };

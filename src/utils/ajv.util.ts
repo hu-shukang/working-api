@@ -1,4 +1,4 @@
-import Ajv, { KeywordDefinition } from 'ajv';
+import Ajv, { Format, KeywordDefinition } from 'ajv';
 import addKeyWorkds from 'ajv-keywords';
 import addFormats from 'ajv-formats';
 
@@ -24,10 +24,41 @@ const uniqueIndex: KeywordDefinition = {
   }
 };
 
+const isAfter: KeywordDefinition = {
+  keyword: 'isAfter',
+  type: 'string',
+  errors: false,
+  schemaType: 'string',
+  compile: (sch, _parentSchema) => {
+    return (data, dataCtx) => {
+      const dependentField = sch;
+      const dependentValue = dataCtx.parentData[dependentField];
+      console.log('sch', sch);
+      console.log('dependentValue', dependentValue);
+      if (!dependentValue) {
+        return true;
+      }
+      const start = new Date(`1970-01-01T${dependentValue}Z`);
+      const end = new Date(`1970-01-01T${data}Z`);
+      return end > start;
+    };
+  }
+};
+
+const hhmmFormat: Format = {
+  type: 'string',
+  validate: (data) => {
+    const regex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
+    return regex.test(data);
+  }
+};
+
 export const getAjv = (schema?: object): any => {
   let ajv = new Ajv({ $data: true, allErrors: true, coerceTypes: false });
   ajv = addKeyWorkds(ajv);
   ajv = addFormats(ajv);
   ajv.addKeyword(uniqueIndex);
+  ajv.addKeyword(isAfter);
+  ajv.addFormat('HH:mm', hhmmFormat);
   return ajv.compile(schema);
 };

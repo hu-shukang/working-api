@@ -8,3 +8,6 @@ export { default as deleteTraffic } from './traffic/delete';
 export { default as queryTraffic } from './traffic/query';
 export { default as updateTraffic } from './traffic/update';
 export { default as reorderTraffic } from './traffic/reorder';
+export { default as addAttendance } from './attendance/add';
+export { default as deleteAttendance } from './attendance/delete';
+export { default as queryAttendance } from './attendance/query';

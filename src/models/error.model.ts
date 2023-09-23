@@ -64,3 +64,17 @@ export class DynamoDBQueryKeyError extends HttpError {
     return BusinessErrorCodes.S03;
   }
 }
+
+export class DeleteEmptyError extends HttpError {
+  constructor() {
+    super(BusinessErrorCodeMessages.S05);
+  }
+
+  get statusCode(): number {
+    return 401;
+  }
+
+  get businessErrorCode(): string {
+    return BusinessErrorCodes.S05;
+  }
+}
