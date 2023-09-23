@@ -78,3 +78,17 @@ export class DeleteEmptyError extends HttpError {
     return BusinessErrorCodes.S05;
   }
 }
+
+export class EmptyAttendanceError extends HttpError {
+  constructor() {
+    super(BusinessErrorCodeMessages.S06);
+  }
+
+  get statusCode(): number {
+    return 401;
+  }
+
+  get businessErrorCode(): string {
+    return BusinessErrorCodes.S06;
+  }
+}

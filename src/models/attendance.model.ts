@@ -34,7 +34,12 @@ export type AttendanceTraffic = {
 };
 
 export type AttendanceTrafficEntity = CommonAttributes & AttendanceTraffic;
+export type AttendanceEntity = CommonAttributes & AttendanceAddUpdateForm;
 
 export type AttendanceViewModel = {
   trafficList: AttendanceTraffic[];
 } & AttendanceAddUpdateForm;
+
+export type AttendanceTrafficViewModel = {
+  index: number;
+} & AttendanceTraffic;

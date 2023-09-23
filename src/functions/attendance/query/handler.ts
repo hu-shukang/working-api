@@ -1,11 +1,12 @@
 import { Const, dateUtil, DynamoDBUtil, middyfy, ValidatedEventAPIGatewayProxyEvent } from '@utils';
 import { schema } from './schema';
-import { AttendanceTraffic, AttendanceViewModel, DBRecord, Key } from '@models';
+import { AttendanceTrafficViewModel, AttendanceViewModel, DBRecord, Key } from '@models';
 
 const { WORKING_TBL, ATTENDANCE, PK, SK, SP, ATTENDANCE_INFO, ATTENDANCE_TRAFFIC } = Const;
 
-const toAttendanceTraffic = (record: DBRecord): AttendanceTraffic => {
+const toAttendanceTrafficViewModel = (record: DBRecord): AttendanceTrafficViewModel => {
   return {
+    index: Number.parseInt(record.sk.split(SP)[3]),
     startStation: record.startStation,
     endStation: record.endStation,
     tractStation: record.tractStation,
@@ -38,7 +39,7 @@ const getAttendanceList = (records: DBRecord[]): AttendanceViewModel[] => {
     } else if (records[i].type === ATTENDANCE_TRAFFIC) {
       const prevIndex = i - 1;
       while (i < records.length) {
-        result[prevIndex].trafficList.push(toAttendanceTraffic(records[i]));
+        result[prevIndex].trafficList.push(toAttendanceTrafficViewModel(records[i]));
         i++;
       }
     } else {

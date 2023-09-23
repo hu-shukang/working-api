@@ -18,6 +18,10 @@ class DateUtil {
     return dayjs(origin).unix();
   }
 
+  public milliseconds(origin?: DayjsDate) {
+    return dayjs(origin).valueOf();
+  }
+
   public add(origin: DayjsDate, value: number, unit: dayjs.ManipulateType) {
     return dayjs(origin).add(value, unit);
   }
