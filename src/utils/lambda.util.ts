@@ -2,12 +2,11 @@ import middy from '@middy/core';
 import { normalizeHttpResponse } from '@middy/util';
 import middyJsonBodyParser from '@middy/http-json-body-parser';
 import validator from '@middy/validator';
-import { transpileSchema } from '@middy/validator/transpile';
 import { HttpError } from '@models/error.model';
 import type { APIGatewayProxyEvent, Handler } from 'aws-lambda';
 import type { FromSchema } from 'json-schema-to-ts';
 import { BusinessErrorCodeMessages, BusinessErrorCodes } from './const.util';
-import Ajv from 'ajv';
+import { getAjv } from './ajv.util';
 
 type ValidatedAPIGatewayProxyEvent<S> = Omit<APIGatewayProxyEvent, 'body'> & { body: FromSchema<S> };
 export type ValidatedEventAPIGatewayProxyEvent<S> = Handler<ValidatedAPIGatewayProxyEvent<S>, any>;
@@ -65,32 +64,10 @@ const customErrorHandler = (): middy.MiddlewareObj => {
   };
 };
 
-const addKeywords = (ajv: Ajv) => {
-  ajv.addKeyword({
-    keyword: 'uniqueIndex',
-    type: 'array',
-    validate: function (_schema: any, data: any) {
-      const seen = new Set<number>();
-      for (const item of data) {
-        const index = item.index;
-        if (index === undefined) {
-          return false;
-        }
-        if (seen.has(index)) {
-          return false;
-        }
-        seen.add(index);
-      }
-      return true;
-    }
-  });
-};
-
 export const middyfy = (handler: any, schema?: object) => {
   let func = middy(handler).use(customErrorHandler()).use(middyJsonBodyParser()).use(responseParser());
   if (schema) {
-    const ajv = transpileSchema(schema, { $data: true, allErrors: true, coerceTypes: false });
-    addKeywords(ajv);
+    const ajv = getAjv(schema);
     func = func.use(validator({ eventSchema: ajv }));
   }
   return func;

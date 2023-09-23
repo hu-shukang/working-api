@@ -17,8 +17,8 @@ export const item = {
 export const bodySchema = {
   type: 'array',
   items: item,
-  uniqueItems: true,
-  uniqueObjects: true
+  minItems: 1,
+  uniqueFields: ['routeId', 'index']
 } as const;
 
 export const schema = {
