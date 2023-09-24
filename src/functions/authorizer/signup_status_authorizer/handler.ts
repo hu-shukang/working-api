@@ -28,6 +28,7 @@ export const main = async (event: APIGatewayRequestAuthorizerEvent, _context: Co
   try {
     const token = event.headers.Authorization;
     console.log('token', token);
+    console.log('event.methodArn', event.methodArn);
     const parameterUtil = new ParameterUtil();
     const secret = await parameterUtil.getJwtSecret();
     const jwtUtil = new JwtUtil();

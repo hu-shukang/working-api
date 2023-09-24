@@ -28,13 +28,13 @@ export const Const = {
   COMMON_AUTHORIZER: {
     name: 'commonAuthorizer',
     resultTtlInSeconds: 300,
-    identitySource: 'method.request.header.Authorization, context.identity.sourceIp, context.httpMethod',
+    identitySource: 'method.request.header.Authorization, context.httpMethod, context.path',
     type: 'request'
   },
   SIGNUP_STATUS_AUTHORIZER: {
     name: 'signupStatusAuthorizer',
     resultTtlInSeconds: 300,
-    identitySource: 'method.request.header.Authorization, context.identity.sourceIp, context.httpMethod',
+    identitySource: 'method.request.header.Authorization, context.httpMethod, context.path',
     type: 'request'
   },
   // 権限

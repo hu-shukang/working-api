@@ -37,9 +37,8 @@ const getAttendanceList = (records: DBRecord[]): AttendanceViewModel[] => {
       result.push(vm);
       i++;
     } else if (records[i].type === ATTENDANCE_TRAFFIC) {
-      const prevIndex = i - 1;
-      while (i < records.length) {
-        result[prevIndex].trafficList.push(toAttendanceTrafficViewModel(records[i]));
+      while (i < records.length && records[i].type === ATTENDANCE_TRAFFIC) {
+        result[result.length - 1].trafficList.push(toAttendanceTrafficViewModel(records[i]));
         i++;
       }
     } else {
@@ -58,6 +57,7 @@ const queryTraffic: ValidatedEventAPIGatewayProxyEvent<any> = async (event) => {
     key.skValue += `${SP}${dateUtil.format(date)}`;
   }
   const records = await dynamodbUtil.getRecords<DBRecord>(WORKING_TBL, key, { beginsWithSK: true });
+  console.log(records);
   return getAttendanceList(records);
 };
 

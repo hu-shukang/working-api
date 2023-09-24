@@ -14,7 +14,10 @@ const addAttendanceTraffic: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema
   if (!record) {
     throw new EmptyAttendanceError();
   }
-  const key = { pk: id, sk: `${ATTENDANCE}${SP}${dateUtil.format(date)}${SP}${TRAFFIC}${dateUtil.milliseconds()}` };
+  const key = {
+    pk: id,
+    sk: `${ATTENDANCE}${SP}${dateUtil.format(date)}${SP}${TRAFFIC}${SP}${dateUtil.milliseconds()}`
+  };
   const attributes = {
     ...form,
     type: ATTENDANCE_TRAFFIC

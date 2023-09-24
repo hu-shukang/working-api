@@ -7,8 +7,8 @@ export const pathParametersSchema = {
       format: 'date'
     },
     index: {
-      type: 'integer',
-      minimum: 0
+      type: 'string',
+      format: 'unix-time-milliseconds'
     }
   },
   additionalProperties: false

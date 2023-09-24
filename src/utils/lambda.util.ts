@@ -49,6 +49,10 @@ const customErrorHandler = (): middy.MiddlewareObj => {
         statusCode = (request.error as any).statusCode;
         businessErrorCode = BusinessErrorCodes.S00;
         request.error.message = BusinessErrorCodeMessages.S00;
+      } else if (request.error.name === 'ConditionalCheckFailedException') {
+        statusCode = 400;
+        businessErrorCode = BusinessErrorCodes.S00;
+        request.error.message = BusinessErrorCodeMessages.S00;
       }
       const message = request.error.message || 'Internal server error';
       normalizeHttpResponse(request);

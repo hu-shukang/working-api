@@ -53,6 +53,15 @@ const hhmmFormat: Format = {
   }
 };
 
+const unixTimeMilliseconds: Format = {
+  type: 'string',
+  validate: (data) => {
+    // 验证字符串是否由13个数字组成
+    const regex = /^\d{13}$/;
+    return regex.test(data);
+  }
+};
+
 export const getAjv = (schema?: object): any => {
   let ajv = new Ajv({ $data: true, allErrors: true, coerceTypes: false });
   ajv = addKeyWorkds(ajv);
@@ -60,5 +69,6 @@ export const getAjv = (schema?: object): any => {
   ajv.addKeyword(uniqueIndex);
   ajv.addKeyword(isAfter);
   ajv.addFormat('HH:mm', hhmmFormat);
+  ajv.addFormat('unix-time-milliseconds', unixTimeMilliseconds);
   return ajv.compile(schema);
 };
