@@ -92,3 +92,17 @@ export class EmptyAttendanceError extends HttpError {
     return BusinessErrorCodes.S06;
   }
 }
+
+export class ApprovalFinishError extends HttpError {
+  constructor() {
+    super(BusinessErrorCodeMessages.S07);
+  }
+
+  get statusCode(): number {
+    return 401;
+  }
+
+  get businessErrorCode(): string {
+    return BusinessErrorCodes.S07;
+  }
+}

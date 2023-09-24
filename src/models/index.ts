@@ -3,3 +3,4 @@ export * from './common.model';
 export * from './error.model';
 export * from './traffic.model';
 export * from './attendance.model';
+export * from './report.model';

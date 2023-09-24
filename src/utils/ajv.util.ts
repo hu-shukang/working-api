@@ -70,6 +70,15 @@ const unixTimeMilliseconds: Format = {
   }
 };
 
+const unixTime: Format = {
+  type: 'string',
+  validate: (data) => {
+    // 验证字符串是否由10个数字组成
+    const regex = /^\d{10}$/;
+    return regex.test(data);
+  }
+};
+
 export const getAjv = (schema?: object): any => {
   let ajv = new Ajv({ $data: true, allErrors: true, coerceTypes: false });
   ajv = addKeyWorkds(ajv);
@@ -79,5 +88,6 @@ export const getAjv = (schema?: object): any => {
   ajv.addFormat('HH:mm', hhmmFormat);
   ajv.addFormat('YYYY-MM', yymmFormat);
   ajv.addFormat('unix-time-milliseconds', unixTimeMilliseconds);
+  ajv.addFormat('unix-time', unixTime);
   return ajv.compile(schema);
 };

@@ -17,6 +17,8 @@ export const Const = {
   ATTENDANCE_INFO: 'ATTENDANCE_INFO',
   ATTENDANCE_TRAFFIC: 'ATTENDANCE_TRAFFIC',
   ATTENDANCE_MONTH_TRAFFIC: 'ATTENDANCE_MONTH_TRAFFIC',
+  ATTENDANCE_REPORT: 'ATTENDANCE_REPORT',
+  REPORT: 'REPORT',
   TRAFFIC: 'TRAFFIC',
   WORKING_TBL: process.env.WORKING_TBL,
   PK_EXISTS_SK_EXISTS: 'attribute_exists(pk) and attribute_exists(sk)',
@@ -57,6 +59,7 @@ export const BusinessErrorCodes = {
   S04: 'S04',
   S05: 'S05',
   S06: 'S06',
+  S07: 'S07',
   S99: 'S99'
 };
 
@@ -68,5 +71,6 @@ export const BusinessErrorCodeMessages = {
   S04: 'ユーザは存在しないです。',
   S05: '削除対象は存在しないです。',
   S06: '該当日の勤務データは未登録です。',
+  S07: '承認済のため削除できません。',
   S99: 'その他のエラー。'
 };
