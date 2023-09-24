@@ -33,6 +33,22 @@ export type AttendanceTraffic = {
   comment?: string;
 };
 
+/**
+ * 定期交通ルート
+ */
+export type AttendanceMonthTraffic = {
+  /** 出発駅 */
+  startStation: string;
+  /** 終点駅 */
+  endStation: string;
+  /** 経由駅 */
+  tractStation?: string[];
+  /** 定期券 */
+  monthTrainPass: number;
+  /** 備考 */
+  comment?: string;
+};
+
 export type AttendanceTrafficEntity = CommonAttributes & AttendanceTraffic;
 export type AttendanceEntity = CommonAttributes & AttendanceAddUpdateForm;
 

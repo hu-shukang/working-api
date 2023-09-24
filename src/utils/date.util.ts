@@ -26,7 +26,7 @@ class DateUtil {
     return dayjs(origin).add(value, unit);
   }
 
-  public format(origin: DayjsDate, format = Const.FORMAT_YYYY_MM_DD) {
+  public format(origin: DayjsDate, format: string = Const.FORMAT_YYYY_MM_DD) {
     return dayjs(origin).format(format);
   }
 }

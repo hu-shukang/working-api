@@ -53,6 +53,14 @@ const hhmmFormat: Format = {
   }
 };
 
+const yymmFormat: Format = {
+  type: 'string',
+  validate: (data) => {
+    const regex = /^\d{4}-(0[1-9]|1[0-2])$/;
+    return regex.test(data);
+  }
+};
+
 const unixTimeMilliseconds: Format = {
   type: 'string',
   validate: (data) => {
@@ -69,6 +77,7 @@ export const getAjv = (schema?: object): any => {
   ajv.addKeyword(uniqueIndex);
   ajv.addKeyword(isAfter);
   ajv.addFormat('HH:mm', hhmmFormat);
+  ajv.addFormat('YYYY-MM', yymmFormat);
   ajv.addFormat('unix-time-milliseconds', unixTimeMilliseconds);
   return ajv.compile(schema);
 };

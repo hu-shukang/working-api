@@ -15,6 +15,8 @@ import {
   queryAttendance,
   addAttendanceTraffic,
   deleteAttendanceTraffic,
+  addMonthAttendanceTraffic,
+  deleteMonthAttendanceTraffic,
   signup
 } from '@functions';
 import { readFileSync } from 'fs';
@@ -63,7 +65,9 @@ const serverlessConfiguration: AWS = {
     deleteAttendance,
     queryAttendance,
     addAttendanceTraffic,
-    deleteAttendanceTraffic
+    deleteAttendanceTraffic,
+    addMonthAttendanceTraffic,
+    deleteMonthAttendanceTraffic
   },
   package: { individually: true },
   custom: {

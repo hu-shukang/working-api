@@ -1,0 +1,54 @@
+export const bodySchema = {
+  type: 'object',
+  required: ['startStation', 'endStation', 'monthTrainPass'],
+  properties: {
+    startStation: {
+      type: 'string',
+      maxLength: 20
+    },
+    endStation: {
+      type: 'string',
+      maxLength: 20
+    },
+    tractStation: {
+      type: 'array',
+      nullable: true,
+      uniqueItems: true,
+      items: {
+        type: 'string',
+        maxLength: 20
+      }
+    },
+    monthTrainPass: {
+      type: 'integer',
+      minimum: 0
+    },
+    comment: {
+      type: 'string',
+      nullable: true,
+      maxLength: 100
+    }
+  },
+  additionalProperties: false
+} as const;
+
+export const pathParametersSchema = {
+  type: 'object',
+  required: ['date'],
+  properties: {
+    date: {
+      type: 'string',
+      format: 'YYYY-MM'
+    }
+  },
+  additionalProperties: false
+} as const;
+
+export const schema = {
+  type: 'object',
+  required: ['body', 'pathParameters'],
+  properties: {
+    body: bodySchema,
+    pathParameters: pathParametersSchema
+  }
+} as const;

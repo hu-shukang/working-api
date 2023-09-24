@@ -13,3 +13,5 @@ export { default as deleteAttendance } from './attendance/delete';
 export { default as queryAttendance } from './attendance/query';
 export { default as addAttendanceTraffic } from './attendance/traffic/add';
 export { default as deleteAttendanceTraffic } from './attendance/traffic/delete';
+export { default as addMonthAttendanceTraffic } from './attendance/month_traffic/add';
+export { default as deleteMonthAttendanceTraffic } from './attendance/month_traffic/delete';

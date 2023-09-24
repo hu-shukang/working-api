@@ -16,6 +16,7 @@ export const Const = {
   ATTENDANCE: 'ATTENDANCE',
   ATTENDANCE_INFO: 'ATTENDANCE_INFO',
   ATTENDANCE_TRAFFIC: 'ATTENDANCE_TRAFFIC',
+  ATTENDANCE_MONTH_TRAFFIC: 'ATTENDANCE_MONTH_TRAFFIC',
   TRAFFIC: 'TRAFFIC',
   WORKING_TBL: process.env.WORKING_TBL,
   PK_EXISTS_SK_EXISTS: 'attribute_exists(pk) and attribute_exists(sk)',
@@ -43,6 +44,7 @@ export const Const = {
   // 日付
   FORMAT_YYYY_MM_DD_HH_mm_ss: 'YYYY-MM-DD HH:mm:ss',
   FORMAT_YYYY_MM_DD: 'YYYY-MM-DD',
+  FORMAT_YYYY_MM: 'YYYY-MM',
   // other
   SUCCESS: 'success'
 } as const;
