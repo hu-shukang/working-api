@@ -7,7 +7,6 @@ export default {
       http: {
         method: 'delete',
         path: '/attendance/{date}/month-traffic',
-        cors: true,
         authorizer: Const.SIGNUP_STATUS_AUTHORIZER
       }
     }

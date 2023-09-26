@@ -7,7 +7,6 @@ export default {
       http: {
         method: 'patch',
         path: '/traffic/reorder',
-        cors: true,
         authorizer: Const.SIGNUP_STATUS_AUTHORIZER
       }
     }

@@ -7,7 +7,6 @@ export default {
       http: {
         method: 'put',
         path: '/traffic/{routeId}',
-        cors: true,
         authorizer: Const.SIGNUP_STATUS_AUTHORIZER
       }
     }

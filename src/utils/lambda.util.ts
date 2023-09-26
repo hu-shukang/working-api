@@ -24,8 +24,7 @@ const responseParser = (): middy.MiddlewareObj => {
         statusCode: 200,
         body: JSON.stringify(request.response),
         headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
+          'Content-Type': 'application/json'
         }
       };
     }

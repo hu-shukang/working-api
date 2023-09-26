@@ -7,7 +7,6 @@ export default {
       http: {
         method: 'get',
         path: '/attendance',
-        cors: true,
         authorizer: Const.SIGNUP_STATUS_AUTHORIZER
       }
     }

@@ -7,7 +7,6 @@ export default {
       http: {
         method: 'post',
         path: '/user/signup',
-        cors: true,
         authorizer: Const.COMMON_AUTHORIZER
       }
     }

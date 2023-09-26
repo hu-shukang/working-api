@@ -7,7 +7,6 @@ export default {
       http: {
         method: 'post',
         path: '/attendance/{date}/report',
-        cors: true,
         authorizer: Const.SIGNUP_STATUS_AUTHORIZER
       }
     }

@@ -6,8 +6,7 @@ export default {
     {
       http: {
         method: 'post',
-        path: '/user/token',
-        cors: true
+        path: '/user/token'
       }
     }
   ]
