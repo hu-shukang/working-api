@@ -11,7 +11,7 @@ export abstract class HttpError extends Error {
 
 export class EmployeeEmptyError extends HttpError {
   constructor() {
-    super(BusinessErrorCodeMessages.S01);
+    super(BusinessErrorCodeMessages.S04);
   }
 
   get statusCode(): number {
@@ -19,7 +19,7 @@ export class EmployeeEmptyError extends HttpError {
   }
 
   get businessErrorCode(): string {
-    return BusinessErrorCodes.S01;
+    return BusinessErrorCodes.S04;
   }
 }
 
