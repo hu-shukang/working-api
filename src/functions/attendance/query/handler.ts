@@ -1,64 +1,30 @@
-import { Const, dateUtil, DynamoDBUtil, middyfy, ValidatedEventAPIGatewayProxyEvent } from '@utils';
-import { schema } from './schema';
-import { AttendanceTrafficViewModel, AttendanceViewModel, DBRecord, Key } from '@models';
+import { Const, DynamoDBUtil, middyfy, ValidatedEventAPIGatewayProxyEvent } from '@utils';
+import { AttendanceReportEntity, AttendanceReportViewModel, DynamoDBQueryOptions, Key } from '@models';
 
-const { WORKING_TBL, ATTENDANCE, PK, SK, SP, ATTENDANCE_INFO, ATTENDANCE_TRAFFIC } = Const;
+const { WORKING_TBL, SP, PK, GSI, GSI_IDX, ATTENDANCE_REPORT } = Const;
 
-const toAttendanceTrafficViewModel = (record: DBRecord): AttendanceTrafficViewModel => {
+const toAttendanceReportViewModel = (record: AttendanceReportEntity): AttendanceReportViewModel => {
   return {
-    index: Number.parseInt(record.sk.split(SP)[3]),
-    startStation: record.startStation,
-    endStation: record.endStation,
-    tractStation: record.tractStation,
-    roundTrip: record.roundTrip,
+    date: record.gsi.split(SP)[1],
+    reportDate: record.reportDate,
+    approvalStatus: record.approvalStatus,
+    approvalEmployeeId: record.approvalEmployeeId,
+    approvalEmployeeName: record.approvalEmployeeName,
+    approvalDate: record.approvalDate,
     comment: record.comment
   };
 };
 
-const toAttendanceViewModel = (record: DBRecord): AttendanceViewModel => {
-  return {
-    date: record.sk.split(SP)[1],
-    start: record.start,
-    end: record.end,
-    break: record.break,
-    nightBreak: record.nightBreak,
-    timeOff: record.timeOff,
-    remotely: record.remotely,
-    trafficList: []
-  };
-};
-
-const getAttendanceList = (records: DBRecord[]): AttendanceViewModel[] => {
-  const result: AttendanceViewModel[] = [];
-  let i = 0;
-  while (i < records.length) {
-    if (records[i].type === ATTENDANCE_INFO) {
-      const vm = toAttendanceViewModel(records[i]);
-      result.push(vm);
-      i++;
-    } else if (records[i].type === ATTENDANCE_TRAFFIC) {
-      while (i < records.length && records[i].type === ATTENDANCE_TRAFFIC) {
-        result[result.length - 1].trafficList.push(toAttendanceTrafficViewModel(records[i]));
-        i++;
-      }
-    } else {
-      i++;
-    }
-  }
-  return result;
-};
-
-const queryTraffic: ValidatedEventAPIGatewayProxyEvent<any> = async (event) => {
-  const date = event.queryStringParameters?.date;
+const handler: ValidatedEventAPIGatewayProxyEvent<any> = async (event) => {
   const { id } = event.requestContext.authorizer;
   const dynamodbUtil = new DynamoDBUtil();
-  const key: Key = { pkName: PK, pkValue: id, skName: SK, skValue: ATTENDANCE };
-  if (date) {
-    key.skValue += `${SP}${dateUtil.format(date)}`;
-  }
-  const records = await dynamodbUtil.getRecords<DBRecord>(WORKING_TBL, key, { beginsWithSK: true });
-  console.log(records);
-  return getAttendanceList(records);
+  const key: Key = { pkName: PK, pkValue: id, skName: GSI, skValue: ATTENDANCE_REPORT };
+  const queryOptions: DynamoDBQueryOptions = {
+    beginsWithSK: true,
+    indexName: GSI_IDX
+  };
+  const records = await dynamodbUtil.getRecords<AttendanceReportEntity>(WORKING_TBL, key, queryOptions);
+  return records.map(toAttendanceReportViewModel);
 };
 
-export const main = middyfy(queryTraffic, schema);
+export const main = middyfy(handler);

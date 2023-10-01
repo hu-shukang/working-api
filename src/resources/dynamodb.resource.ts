@@ -19,6 +19,10 @@ export const WorkingTable = {
       {
         AttributeName: 'sort',
         AttributeType: 'S'
+      },
+      {
+        AttributeName: 'gsi',
+        AttributeType: 'S'
       }
     ],
     KeySchema: [
@@ -53,6 +57,22 @@ export const WorkingTable = {
           },
           {
             AttributeName: 'sort',
+            KeyType: 'RANGE'
+          }
+        ],
+        Projection: {
+          ProjectionType: 'ALL'
+        }
+      },
+      {
+        IndexName: Const.GSI_IDX,
+        KeySchema: [
+          {
+            AttributeName: 'pk',
+            KeyType: 'HASH'
+          },
+          {
+            AttributeName: 'gsi',
             KeyType: 'RANGE'
           }
         ],

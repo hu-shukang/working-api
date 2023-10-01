@@ -1,5 +1,6 @@
-export const queryStringParametersSchema = {
-  type: ['object', 'null'],
+export const pathParametersSchema = {
+  type: 'object',
+  required: ['date'],
   properties: {
     date: {
       type: 'string',
@@ -11,7 +12,8 @@ export const queryStringParametersSchema = {
 
 export const schema = {
   type: 'object',
+  required: ['pathParameters'],
   properties: {
-    queryStringParameters: queryStringParametersSchema
+    pathParameters: pathParametersSchema
   }
 } as const;
