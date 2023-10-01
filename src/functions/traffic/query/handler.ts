@@ -7,7 +7,10 @@ const { WORKING_TBL, TRAFFIC_ROUTE, PK, SK, SORT_IDX, SORT, SP } = Const;
 const getTraffic = async (dynamodbUtil: DynamoDBUtil, id: string, routeId: string): Promise<TrafficEntity[]> => {
   const key: Key = { pkName: PK, pkValue: id, skName: SK, skValue: `${TRAFFIC_ROUTE}${SP}${routeId}` };
   const entity = await dynamodbUtil.getRecord<TrafficEntity>(WORKING_TBL, key);
-  return [entity];
+  if (entity) {
+    return [entity];
+  }
+  return [];
 };
 
 const getTrafficList = async (dynamodbUtil: DynamoDBUtil, id: string): Promise<TrafficEntity[]> => {
