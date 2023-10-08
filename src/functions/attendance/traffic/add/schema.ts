@@ -38,7 +38,7 @@ export const pathParametersSchema = {
   properties: {
     date: {
       type: 'string',
-      format: 'YYYY-MM'
+      format: 'date'
     }
   },
   additionalProperties: false
