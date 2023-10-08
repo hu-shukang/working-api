@@ -54,7 +54,7 @@ const handler: ValidatedEventAPIGatewayProxyEvent<any> = async (event) => {
   const dynamodbUtil = new DynamoDBUtil();
   const key: Key = { pkName: PK, pkValue: id, skName: SK, skValue: ATTENDANCE };
   if (date) {
-    key.skValue += `${SP}${dateUtil.format(date)}`;
+    key.skValue += `${SP}${date}`;
   }
   const records = await dynamodbUtil.getRecords<DBRecord>(WORKING_TBL, key, { beginsWithSK: true });
   console.log(records);
