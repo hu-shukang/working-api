@@ -32,6 +32,11 @@ export const bodySchema = {
     remotely: {
       type: 'boolean',
       nullable: true
+    },
+    comment: {
+      type: 'string',
+      maxLength: 100,
+      nullable: true
     }
   },
   additionalProperties: false

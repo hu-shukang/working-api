@@ -15,6 +15,8 @@ export type AttendanceAddUpdateForm = {
   timeOff?: string;
   /** 在宅 */
   remotely?: boolean;
+  /** 備考 */
+  comment?: string;
 };
 
 /**

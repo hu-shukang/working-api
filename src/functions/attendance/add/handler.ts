@@ -24,7 +24,8 @@ const addAttendance: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = asy
             break: form.break,
             nightBreak: form.nightBreak,
             timeOff: form.timeOff,
-            remotely: form.remotely
+            remotely: form.remotely,
+            comment: form.comment
           }
         }
       },
