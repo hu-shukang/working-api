@@ -52,7 +52,7 @@ const handler: ValidatedEventAPIGatewayProxyEvent<any> = async (event) => {
   const date = event.pathParameters.date;
   const { id } = event.requestContext.authorizer;
   const dynamodbUtil = new DynamoDBUtil();
-  const key: Key = { pkName: PK, pkValue: `${id}${SP}${date}`, skName: SK, skValue: ATTENDANCE };
+  const key: Key = { pkName: PK, pkValue: id, skName: SK, skValue: `${ATTENDANCE}${SP}${date}` };
   const records = await dynamodbUtil.getRecords<DBRecord>(WORKING_TBL, key, { beginsWithSK: true });
   console.log(records);
   return getAttendanceList(records);
