@@ -34,7 +34,7 @@ const addAttendance: ValidatedEventAPIGatewayProxyEvent<typeof bodySchema> = asy
           TableName: WORKING_TBL,
           Item: {
             pk: id,
-            sk: `${ATTENDANCE}${SP}${dateUtil.format(form.date)}`,
+            sk: `${ATTENDANCE}${SP}${dateUtil.format(form.date, FORMAT_YYYY_MM)}`,
             type: ATTENDANCE_REPORT,
             gsi: `${ATTENDANCE_REPORT}${SP}${dateUtil.format(form.date, FORMAT_YYYY_MM)}`
           },
