@@ -1,14 +1,10 @@
 export const pathParametersSchema = {
   type: 'object',
-  required: ['date', 'index'],
+  required: ['date'],
   properties: {
     date: {
       type: 'string',
       format: 'date'
-    },
-    index: {
-      type: 'string',
-      format: 'unix-time-milliseconds'
     }
   },
   additionalProperties: false

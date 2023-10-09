@@ -1,4 +1,4 @@
-export const bodySchema = {
+const itemSchema = {
   type: 'object',
   required: ['startStation', 'endStation', 'roundTrip'],
   properties: {
@@ -30,6 +30,14 @@ export const bodySchema = {
     }
   },
   additionalProperties: false
+} as const;
+
+export const bodySchema = {
+  type: 'array',
+  uniqueItems: true,
+  minItems: 1,
+  maxItems: 50,
+  items: itemSchema
 } as const;
 
 export const pathParametersSchema = {

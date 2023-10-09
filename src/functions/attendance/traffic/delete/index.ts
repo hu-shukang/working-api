@@ -6,7 +6,7 @@ export default {
     {
       http: {
         method: 'delete',
-        path: '/attendance/{date}/traffic/{index}',
+        path: '/attendance/{date}/traffic',
         authorizer: Const.SIGNUP_STATUS_AUTHORIZER
       }
     }
