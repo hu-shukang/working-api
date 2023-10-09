@@ -17,6 +17,8 @@ export type AttendanceAddUpdateForm = {
   remotely?: boolean;
   /** 備考 */
   comment?: string;
+  /** 日常交通ルート */
+  trafficList?: AttendanceTraffic[];
 };
 
 /**

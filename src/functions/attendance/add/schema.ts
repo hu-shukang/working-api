@@ -1,3 +1,37 @@
+const trafficSchema = {
+  type: 'object',
+  required: ['startStation', 'endStation', 'roundTrip'],
+  properties: {
+    startStation: {
+      type: 'string',
+      maxLength: 20
+    },
+    endStation: {
+      type: 'string',
+      maxLength: 20
+    },
+    tractStation: {
+      type: 'array',
+      nullable: true,
+      uniqueItems: true,
+      items: {
+        type: 'string',
+        maxLength: 20
+      }
+    },
+    roundTrip: {
+      type: 'integer',
+      minimum: 0
+    },
+    comment: {
+      type: 'string',
+      nullable: true,
+      maxLength: 100
+    }
+  },
+  additionalProperties: false
+} as const;
+
 export const bodySchema = {
   type: 'object',
   required: ['date', 'start', 'end'],
@@ -37,6 +71,13 @@ export const bodySchema = {
       type: 'string',
       maxLength: 100,
       nullable: true
+    },
+    trafficList: {
+      type: 'array',
+      uniqueItems: true,
+      maxItems: 10,
+      nullable: true,
+      items: trafficSchema
     }
   },
   additionalProperties: false
