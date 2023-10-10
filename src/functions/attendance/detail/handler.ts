@@ -24,6 +24,7 @@ const toAttendanceViewModel = (record: DBRecord): AttendanceViewModel => {
     nightBreak: record.nightBreak,
     timeOff: record.timeOff,
     remotely: record.remotely,
+    comment: record.comment,
     trafficList: []
   };
 };
