@@ -34,7 +34,7 @@ const trafficSchema = {
 
 export const bodySchema = {
   type: 'object',
-  required: ['date', 'start', 'end'],
+  required: ['date'],
   properties: {
     date: {
       type: 'string',
@@ -42,12 +42,14 @@ export const bodySchema = {
     },
     start: {
       type: 'string',
-      format: 'HH:mm'
+      format: 'HH:mm',
+      nullable: true
     },
     end: {
       type: 'string',
       format: 'HH:mm',
-      isAfter: 'start'
+      isAfter: 'start',
+      nullable: true
     },
     break: {
       type: 'integer',

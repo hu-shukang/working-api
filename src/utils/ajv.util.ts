@@ -33,8 +33,6 @@ const isAfter: KeywordDefinition = {
     return (data, dataCtx) => {
       const dependentField = sch;
       const dependentValue = dataCtx.parentData[dependentField];
-      console.log('sch', sch);
-      console.log('dependentValue', dependentValue);
       if (!dependentValue) {
         return true;
       }
